@@ -22,11 +22,10 @@ namespace POS.Controllers
         }
 
         [HttpPost("/foods")]
-        public ActionResult ViewAllPost()
+        public ActionResult ViewAllPost(string name, int price, string category)
         {
-            string name = Request.Form["name"];
 
-            Food newFood = new Food(name, price, category, id);
+            Food newFood = new Food(name, price, category);
             newFood.Save();
 
             return RedirectToAction("Index");
