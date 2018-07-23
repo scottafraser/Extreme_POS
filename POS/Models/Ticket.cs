@@ -341,5 +341,77 @@ namespace POS.Models
 
             return existingTable;
         }
+
+        public List<Food> GetFood()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT food_id from tickets WHERE id = @searchId;";
+
+            MySqlParameter ticketId = new MySqlParameter();
+            ticketId.ParameterName = "@searchId";
+            ticketId.Value = Id;
+            cmd.Parameters.Add(ticketId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            List<Food> existingFood = new List<Food> { };
+
+            while (rdr.Read())
+            {
+                int foodId = rdr.GetInt32(0);
+                string name = rdr.GetString(1);
+                double price = rdr.GetDouble(2);
+                string category = rdr.GetString(3);
+
+                Food newFood = new Food(name, price, category, foodId);
+                existingFood.Add(newFood);
+            }
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return existingFood;
+        }
+
+        public List<Drink> GetDrinks()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT drink_id from tickets WHERE id = @searchId;";
+
+            MySqlParameter ticketId = new MySqlParameter();
+            ticketId.ParameterName = "@searchId";
+            ticketId.Value = Id;
+            cmd.Parameters.Add(ticketId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            List<Drink> existingDrinks = new List<Drink> { };
+
+            while (rdr.Read())
+            {
+                int drinkId = rdr.GetInt32(0);
+                string name = rdr.GetString(1);
+                double price = rdr.GetDouble(2);
+                string category = rdr.GetString(3);
+
+                Drink newDrink = new Drink(name, price, category, drinkId);
+                existingDrinks.Add(newDrink);
+            }
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return existingDrinks;
+        }
     }
 }
