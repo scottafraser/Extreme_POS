@@ -1,0 +1,27 @@
+body * {
+    /* outline: 1px gray solid; */
+}
+
+.grid {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 20fr 1fr;
+    grid-template-areas: "navigation tabs-field" "ui-display ticket-display" "footer footer";
+}
+
+.grid-piece {
+    background-color: lightblue;
+    position: relative;
+    outline: 1px solid gray;
+}
+
+.navigation { grid-area: navigation; display: flex; flex-direction: row; }
+    .ui-nav {flex: 1;position: relative;}
+        .ui-nav button {width: 100%; height: 100%; position: absolute; }
+            .ui-nav:not(:first-child) button { border-left: 1px solid gray; }
+.tabs { grid-area: tabs-field; }
+    .add-tab {position: absolute;right: -1px;b ottom: 0px;bottom: 0;border: 1px solid black;border-bottom: 2px solid lightblue;z-index: 1;height: 50%;}
+.ui-display { grid-area: ui-display; }
+.ticket-display { grid-area: ticket-display; }
+.footer { grid-area: footer; }
