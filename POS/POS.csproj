@@ -22,5 +22,7 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Drinks\" />
     <Folder Include="Views\Food\" />
+    <Folder Include="Views\Ticket\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
