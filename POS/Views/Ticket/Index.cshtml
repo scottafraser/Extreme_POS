@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var ticket in Model)
+{
+    @Model.FoundFood.GetAll()
+    @Model.FoundDrink.GetAll()
+}
