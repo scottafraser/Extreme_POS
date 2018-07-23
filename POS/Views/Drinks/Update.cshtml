@@ -3,8 +3,8 @@
 }
 
 <div>
-    <a href="/drinks/@Model.Id/details">@Model.Name</a>
-    <form action="/drinks/@Model.Id/update" method="post">
+    <a href="/drink/@Model.Id/details">@Model.Name</a>
+    <form action="/drink/@Model.Id/update" method="post">
         <div class="form-group">
             <label for="new-name">Name:</label>
             <input type="text" name="new-name" value="@Model.Name" required>
@@ -17,7 +17,7 @@
                 {
                 @if (!(Model.GetDrinks().Contains(drinks)))
                 {
-                <option value="@drinks.Id">@drinks.Name</option>
+                <option value="@drinks.Id">@drink.Name</option>
                 }
                 }
             </select>
