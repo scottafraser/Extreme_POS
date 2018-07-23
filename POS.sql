@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 23, 2018 at 06:30 PM
+-- Generation Time: Jul 23, 2018 at 10:57 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `POS`
 --
-CREATE DATABASE IF NOT EXISTS `POS` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `POS`;
 
 -- --------------------------------------------------------
 
@@ -35,6 +33,13 @@ CREATE TABLE `drinks` (
   `category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `drinks`
+--
+
+INSERT INTO `drinks` (`id`, `name`, `price`, `category`) VALUES
+(1, 'IPA', 6, 'beer');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +53,14 @@ CREATE TABLE `food` (
   `category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `food`
+--
+
+INSERT INTO `food` (`id`, `name`, `price`, `category`) VALUES
+(1, 'Burger', 15, 'entree'),
+(2, 'fries', 8, 'app');
+
 -- --------------------------------------------------------
 
 --
@@ -56,7 +69,7 @@ CREATE TABLE `food` (
 
 CREATE TABLE `history` (
   `id` int(11) NOT NULL,
-  `ticket #` int(11) NOT NULL
+  `table_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -145,13 +158,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `drinks`
 --
 ALTER TABLE `drinks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `history`
@@ -179,6 +192,4 @@ ALTER TABLE `users`
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
