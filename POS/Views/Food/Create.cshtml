@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<form action="/food" method="post">
+    <div class="form-group">
+        <label for="name">Enter Food Item</label>
+        <input type="text" id="name" name="name" required />
+    </div>
+    <div class="form-group">
+        <label for="name">Enter Food Cost</label>
+        <input type="number" id="cost" name="cost" required />
+    </div>
+    <div class="form-group">
+        <label for="name">Enter Food Category</label>
+        <input type="text" id="category" name="category" required />
+    </div>
+    <button type="submit">Add</button>
+</form>

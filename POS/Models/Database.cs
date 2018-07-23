@@ -4,6 +4,7 @@ using POS;
 
 namespace POS.Models
 {
+
     public class DB
     {
         public static MySqlConnection Connection()
@@ -12,4 +13,7 @@ namespace POS.Models
             return conn;
         }
     }
+
+
 }
+

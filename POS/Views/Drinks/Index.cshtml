@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Drinks";
+}
+<div>
+    <div>
+        <p>
+            <a href="/stylist/add">Add New Drink Item</a>
+            <span>|</span>
+            <a href="/stylist/confirm">Delete All Drink Items</a>  @*// unnecessary?*@
+        </p>
+    </div>
+</div>
+<div class="row">
+    @{
+    foreach (var drink in Model)
+    {
+    <div class="col-md-2">
+        <strong><a href="/food/@food.Id/details">@drink.Name</a></strong>
+    </div>
+    <div>
+        <strong>@drink.Price</strong>
+    </div>
+    <div>
+        <small><a href="/drink/@drink.Id/Update">Update</a></small><span> | </span>
+    </div>
+    <div>
+        <small><a href="/drink/@drink.Id/delete">Delete</a></small>
+    </div>
+    <div class="col-md-9"></div>
+    <hr />
+    }
+    }
+</div>
