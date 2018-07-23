@@ -56,5 +56,10 @@ namespace POS
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        public static class DBConfiguration
+        {
+            public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=POS;";
+        }
     }
 }
