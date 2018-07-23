@@ -51,7 +51,7 @@ namespace POS.Models
                 conn.Open();
 
                 var cmd = conn.CreateCommand() as MySqlCommand;
-                cmd.CommandText = @"INSERT INTO food (name, price, categor) VALUES (@Name, @Price, @Category);";
+                cmd.CommandText = @"INSERT INTO food (name, price, category) VALUES (@Name, @Price, @Category);";
 
                 cmd.Parameters.AddWithValue("@Name", this.Name);
                 cmd.Parameters.AddWithValue("@Price", this.Name);
