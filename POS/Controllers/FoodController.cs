@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using POS.Models;
 
 namespace POS.Controllers
 {
-    public class FoodController
+    public class FoodController : Controller
     {
         [HttpGet("/food/add")]
         public ActionResult Create()
@@ -11,10 +15,10 @@ namespace POS.Controllers
             return View();
         }
 
-        [HttpGet("/foodss")]
+        [HttpGet("/foods")]
         public ActionResult ViewAll()
         {
-            return View(Stylist.GetAll());
+            return View(Food.GetAll());
         }
 
         [HttpPost("/foods")]
@@ -22,7 +26,7 @@ namespace POS.Controllers
         {
             string name = Request.Form["name"];
 
-            Food newFood = new Food(name);
+            Food newFood = new Food(name, price, category, id);
             newFood.Save();
 
             return RedirectToAction("Index");

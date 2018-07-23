@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using POS.Models;
 
 namespace POS.Controllers
 {
-    public class DrinkController
+    public class DrinkController : Controller
     {
         [HttpGet("/drink/add")]
         public ActionResult Create()
@@ -23,7 +26,7 @@ namespace POS.Controllers
         {
             string name = Request.Form["name"];
 
-            Drink newDrink = new Drink(name);
+            Drink newDrink = new Drink(name, price, category, id);
             newDrink.Save();
 
             return RedirectToAction("Index");
