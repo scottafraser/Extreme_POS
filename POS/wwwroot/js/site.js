@@ -9,7 +9,7 @@ var xhr;
 } else if (window.ActiveXObject) { // IE 8 and older
     xhr = new ActiveXObject("Microsoft.XMLHTTP");
 }
-var data = "name=" + book;
+var data = "name=" + food;
      xhr.open("POST", "book-suggestion.php", true); 
      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");                  
      xhr.send(data);

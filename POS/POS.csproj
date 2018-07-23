@@ -24,5 +24,6 @@
     <Folder Include="Views\Food\" />
     <Folder Include="Views\Ticket\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Table\" />
   </ItemGroup>
 </Project>

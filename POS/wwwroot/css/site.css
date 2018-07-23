@@ -35,3 +35,13 @@ textarea {
         display: none
     }
 }
+
+.table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    color: blue;
+}
