@@ -167,7 +167,7 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM stylists WHERE id = @thisId;";
+            cmd.CommandText = @"SELECT * FROM tickets WHERE id = @thisId;";
 
             MySqlParameter thisId = new MySqlParameter();
             thisId.ParameterName = "@thisId";
@@ -176,18 +176,24 @@ namespace POS.Models
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-            int stylistId = 0;
-            int stylistExp = 0;
-            string stylistName = "";
+            int ticketId = 0;
+            int seatNum = 0;
+            int foodId = 0;
+            int drinkId = 0;
+            int userId = 0;
+            int tableId = 0;
 
             while (rdr.Read())
             {
-                stylistId = rdr.GetInt32(0);
-                stylistName = rdr.GetString(1);
-                stylistExp = rdr.GetInt32(2);
+                ticketId = rdr.GetInt32(0);
+                seatNum = rdr.GetInt32(1);
+                foodId = rdr.GetInt32(2);
+                drinkId = rdr.GetInt32(3);
+                userId = rdr.GetInt32(4);
+                tableId = rdr.GetInt32(5);
             }
 
-            Stylist foundStylist = new Stylist(stylistName, stylistExp, stylistId);
+            Ticket foundTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
 
             conn.Close();
             if (conn != null)
@@ -195,7 +201,7 @@ namespace POS.Models
                 conn.Dispose();
             }
 
-            return foundStylist;
+            return foundTicket;
         }
 
         public void Save()
@@ -204,18 +210,32 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO stylists (name, experience) VALUES (@stylistName, @stylistExp);";
+            cmd.CommandText = @"INSERT INTO tickets (seat_number, food_id, drink_id, user_id, table_id) VALUES (@Seat, @Food, @Drink, @User, @Table);";
 
-            MySqlParameter name = new MySqlParameter();
-            name.ParameterName = "@stylistName";
-            name.Value = this.Name;
+            MySqlParameter seat = new MySqlParameter();
+            seat.ParameterName = "@Seat";
+            seat.Value = this.SeatNumber;
+            cmd.Parameters.Add(seat);
 
-            MySqlParameter experience = new MySqlParameter();
-            experience.ParameterName = "@stylistExp";
-            experience.Value = this.Experience;
+            MySqlParameter food = new MySqlParameter();
+            food.ParameterName = "@Food";
+            food.Value = this.Food_Id;
+            cmd.Parameters.Add(food);
 
-            cmd.Parameters.Add(name);
-            cmd.Parameters.Add(experience);
+            MySqlParameter drink = new MySqlParameter();
+            drink.ParameterName = "@Drink";
+            drink.Value = this.Drink_Id;
+            cmd.Parameters.Add(drink);
+
+            MySqlParameter user = new MySqlParameter();
+            user.ParameterName = "@User";
+            user.Value = this.User_Id;
+            cmd.Parameters.Add(user);
+
+            MySqlParameter table = new MySqlParameter();
+            table.ParameterName = "@Table";
+            table.Value = this.Table_Id;
+            cmd.Parameters.Add(table);
 
             cmd.ExecuteNonQuery();
             Id = (int)cmd.LastInsertedId;
@@ -227,23 +247,26 @@ namespace POS.Models
             }
         }
 
-        public static List<Stylist> GetAll()
+        public static List<Ticket> GetAll()
         {
-            List<Stylist> allStylists = new List<Stylist> { };
+            List<Ticket> allTickets = new List<Ticket> { };
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM stylists;";
+            cmd.CommandText = @"SELECT * FROM tickets;";
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
             while (rdr.Read())
             {
-                int stylistId = rdr.GetInt32(0);
-                string stylistName = rdr.GetString(1);
-                int stylistExp = rdr.GetInt32(2);
-                Stylist newStylist = new Stylist(stylistName, stylistExp, stylistId);
-                allStylists.Add(newStylist);
+                int ticketId = rdr.GetInt32(0);
+                int seatNum = rdr.GetInt32(1);
+                int foodId = rdr.GetInt32(2);
+                int drinkId = rdr.GetInt32(3);
+                int userId = rdr.GetInt32(4);
+                int tableId = rdr.GetInt32(5);
+                Ticket newTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
+                allTickets.Add(newTicket);
             }
 
             conn.Close();
@@ -252,60 +275,30 @@ namespace POS.Models
                 conn.Dispose();
             }
 
-            return allStylists;
+            return allTickets;
         }
 
-        public void AddSpecialty(Specialty newSpecialty)
+        public User GetUser()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO stylists_specialties (specialty_id, stylist_id) VALUES (@SpecialtyId, @StylistId);";
+            cmd.CommandText = @"SELECT user_id from tickets WHERE id = @searchId;";
 
-            MySqlParameter specialty_id = new MySqlParameter();
-            specialty_id.ParameterName = "@SpecialtyId";
-            specialty_id.Value = newSpecialty.Id;
-            cmd.Parameters.Add(specialty_id);
-
-            MySqlParameter stylist_id = new MySqlParameter();
-            stylist_id.ParameterName = "@StylistId";
-            stylist_id.Value = Id;
-            cmd.Parameters.Add(stylist_id);
-
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-        }
-
-        public List<Specialty> GetSpecialties()
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT specialties.* FROM stylists
-                                JOIN stylists_specialties ON (stylists.id = stylists_specialties.stylist_id)
-                                JOIN specialties ON (stylists_specialties.specialty_id = specialties.id)
-                                WHERE stylists.id = @StylistId;";
-
-            MySqlParameter stylistIdParameter = new MySqlParameter();
-            stylistIdParameter.ParameterName = "@StylistId";
-            stylistIdParameter.Value = Id;
-            cmd.Parameters.Add(stylistIdParameter);
+            MySqlParameter ticketId = new MySqlParameter();
+            ticketId.ParameterName = "@searchId";
+            ticketId.Value = Id;
+            cmd.Parameters.Add(ticketId);
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-            List<Specialty> specialties = new List<Specialty> { };
+            User existingUser = null;
 
             while (rdr.Read())
             {
-                int specialtyId = rdr.GetInt32(0);
-                string specialtyName = rdr.GetString(1);
+                int userId = rdr.GetInt32(0);
 
-                Specialty newSpecialty = new Specialty(specialtyName, specialtyId);
-                specialties.Add(newSpecialty);
+                existingUser = User.Find(userId);
             }
 
             conn.Close();
@@ -314,60 +307,30 @@ namespace POS.Models
                 conn.Dispose();
             }
 
-            return specialties;
+            return existingUser;
         }
 
-        public void AddClient(Client newClient)
+        public Table GetTable()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO stylists_clients (client_id, stylist_id) VALUES (@ClientId, @StylistId);";
+            cmd.CommandText = @"SELECT table_id from tickets WHERE id = @searchId;";
 
-            MySqlParameter client_id = new MySqlParameter();
-            client_id.ParameterName = "@ClientId";
-            client_id.Value = newClient.Id;
-            cmd.Parameters.Add(client_id);
-
-            MySqlParameter stylist_id = new MySqlParameter();
-            stylist_id.ParameterName = "@StylistId";
-            stylist_id.Value = Id;
-            cmd.Parameters.Add(stylist_id);
-
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-        }
-
-        public List<Client> GetClients()
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT clients.* FROM stylists
-                                JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
-                                JOIN clients ON (stylists_clients.client_id = clients.id)
-                                WHERE stylists.id = @StylistId;";
-
-            MySqlParameter stylistIdParameter = new MySqlParameter();
-            stylistIdParameter.ParameterName = "@StylistId";
-            stylistIdParameter.Value = Id;
-            cmd.Parameters.Add(stylistIdParameter);
+            MySqlParameter ticketId = new MySqlParameter();
+            ticketId.ParameterName = "@searchId";
+            ticketId.Value = Id;
+            cmd.Parameters.Add(ticketId);
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-            List<Client> clients = new List<Client> { };
+            Table existingTable = null;
 
             while (rdr.Read())
             {
-                int clientId = rdr.GetInt32(0);
-                string clientName = rdr.GetString(1);
+                int tableId = rdr.GetInt32(0);
 
-                Client newClient = new Client(clientName, clientId);
-                clients.Add(newClient);
+                existingTable = Table.Find(tableId);
             }
 
             conn.Close();
@@ -376,12 +339,7 @@ namespace POS.Models
                 conn.Dispose();
             }
 
-            return clients;
-        }
-
-        public List<Client> GetAllClients()
-        {
-            return Client.GetAll();
+            return existingTable;
         }
     }
 }
