@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace POS.Models
 {
-    #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class Ticket
-    #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         public int SeatNumber { get; set; }
         public Food Food_Id { get; set; }
@@ -18,13 +16,9 @@ namespace POS.Models
         public Table Table_Id { get; set; }
         public int Id { get; set; }
 
-        public Ticket(int seatNumber, Food food_id, Drink drink_id, User user_id, Table table_id, int id = 0)
+        public Ticket(int seatNumber, int id = 0)
         {
             SeatNumber = seatNumber;
-            Food_Id = food_id;
-            Drink_Id = drink_id;
-            User_Id = user_id;
-            Table_Id = table_id;
             Id = id;
         }
 
@@ -39,6 +33,106 @@ namespace POS.Models
                 Ticket newTicket = (Ticket)otherTicket;
                 bool seatEquality = (this.SeatNumber == newTicket.SeatNumber);
                 return (seatEquality);
+            }
+        }
+
+        public void AddFood(Food newFood)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO tickets (food_id) VALUES (@FoodId) WHERE id = @searchId;";
+
+            MySqlParameter food_id = new MySqlParameter();
+            food_id.ParameterName = "@FoodId";
+            food_id.Value = newFood.Id;
+            cmd.Parameters.Add(food_id);
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void AddDrink(Drink newDrink)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO tickets (drink_id) VALUES (@DrinkId) WHERE id = @searchId;";
+
+            MySqlParameter drink_id = new MySqlParameter();
+            drink_id.ParameterName = "@DrinkId";
+            drink_id.Value = newDrink.Id;
+            cmd.Parameters.Add(drink_id);
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void AddUser(User newUser)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO tickets (user_id) VALUES (@UserId) WHERE id = @searchId;";
+
+            MySqlParameter user_id = new MySqlParameter();
+            user_id.ParameterName = "@UserId";
+            user_id.Value = newUser.Id;
+            cmd.Parameters.Add(user_id);
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void AddTable(Table newTable)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO tickets (table_id) VALUES (@TableId) WHERE id = @searchId;";
+
+            MySqlParameter table_id = new MySqlParameter();
+            table_id.ParameterName = "@TableId";
+            table_id.Value = newTable.Id;
+            cmd.Parameters.Add(table_id);
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
             }
         }
 
