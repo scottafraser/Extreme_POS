@@ -1,5 +1,5 @@
-body * {
-    /* outline: 1px gray solid; */
+body {
+    overflow: hidden;
 }
 
 .grid {
@@ -24,5 +24,6 @@ body * {
 .tabs { grid-area: tabs-field; }
     .add-tab {position: absolute;right: -1px;b ottom: 0px;bottom: 0;border: 1px solid black;border-bottom: 2px solid lightblue;z-index: 1;height: 50%;}
 .ui-display { grid-area: ui-display; }
+    .display { height: 100%; background-color: white; display: none;}
 .ticket-display { grid-area: ticket-display; }
 .footer { grid-area: footer; }
