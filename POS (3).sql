@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 24, 2018 at 11:06 PM
+-- Generation Time: Jul 24, 2018 at 11:08 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -132,16 +132,15 @@ INSERT INTO `mods` (`id`, `name`, `price`, `category`) VALUES
 
 CREATE TABLE `tables` (
   `id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `seats` int(11) NOT NULL
+  `number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tables`
 --
 
-INSERT INTO `tables` (`id`, `number`, `seats`) VALUES
-(1, 1, 4);
+INSERT INTO `tables` (`id`, `number`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
