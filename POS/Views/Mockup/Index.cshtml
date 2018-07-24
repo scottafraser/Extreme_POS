@@ -24,11 +24,15 @@
 
             <!-- Navigation -->
             <div class="navigation grid-piece">
-                <div class="ui-nav"><button type="button" class="btn btn-link btn-sm">Server</button></div>
-                <div class="ui-nav"><button type="button" class="btn btn-link btn-sm">Admin</button></div>
-                <div class="ui-nav"><button type="button" class="btn btn-link btn-sm">Table</button></div>
-                <div class="ui-nav"><button type="button" class="btn btn-link btn-sm">Food</button></div>
-                <div class="ui-nav"><button type="button" class="btn btn-link btn-sm">Drink</button></div>
+                <div class="ui-nav">
+                    <div class="permissions">
+                        <button id="server" type="button" class="btn btn-link btn-sm">Server</button>                 
+                        <button id="admin" type="button" class="btn btn-link btn-sm">Admin</button>
+                    </div>
+                </div>
+                <div class="ui-nav menu"><button id="tables" type="button" class="btn btn-link btn-sm">Tables</button></div>
+                <div class="ui-nav menu"><button id="food" type="button" class="btn btn-link btn-sm">Food</button></div>
+                <div class="ui-nav menu"><button id="drinks" class="btn btn-link btn-sm">Drinks</button></div>
             </div>
 
             <!-- Tabs -->
@@ -37,7 +41,11 @@
             </div>
 
             <!-- User Interface --> 
-            <div class="ui-display grid-piece">ui-display</div>
+            <div class="ui-display grid-piece">
+            <div id="tables-display" class="display">Tables</div>
+            <div id="food-display" class="display">Food</div>
+            <div id="drinks-display" class="display">Drinks</div>
+            </div>
 
             <!-- Ticket --> 
             <div class="ticket-display grid-piece">ticket-display</div>
