@@ -95,6 +95,11 @@ namespace POS.Models
             number.Value = newNumber;
             cmd.Parameters.Add(number);
 
+            MySqlParameter seats = new MySqlParameter();
+            seats.ParameterName = "@newSeats";
+            seats.Value = newSeats;
+            cmd.Parameters.Add(seats);
+
             cmd.ExecuteNonQuery();
             this.Number = newNumber;
 
@@ -122,14 +127,16 @@ namespace POS.Models
 
             int tableId = 0;
             int tableNum = 0;
+            int tableSeats = 0;
 
             while (rdr.Read())
             {
                 tableId = rdr.GetInt32(0);
                 tableNum = rdr.GetInt32(1);
+                tableSeats = rdr.GetInt32(2);
             }
 
-            Table foundTable = new Table(tableNum, tableId);
+            Table foundTable = new Table(tableNum, tableSeats, tableId);
 
             conn.Close();
             if (conn != null)
@@ -146,12 +153,17 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tables (number) VALUES (@number);";
+            cmd.CommandText = @"INSERT INTO tables (number, seats) VALUES (@number, @seats);";
 
             MySqlParameter number = new MySqlParameter();
-            number.ParameterName = "@stylistName";
+            number.ParameterName = "@number";
             number.Value = this.Number;
             cmd.Parameters.Add(number);
+
+            MySqlParameter seats = new MySqlParameter();
+            seats.ParameterName = "@seats";
+            seats.Value = this.Seats;
+            cmd.Parameters.Add(seats);
 
             cmd.ExecuteNonQuery();
             Id = (int)cmd.LastInsertedId;
@@ -177,7 +189,8 @@ namespace POS.Models
             {
                 int tableId = rdr.GetInt32(0);
                 int tableNum = rdr.GetInt32(1);
-                Table newTable = new Table(tableNum, tableId);
+                int tableSeats = rdr.GetInt32(2);
+                Table newTable = new Table(tableNum, tableSeats, tableId);
                 allTables.Add(newTable);
             }
 
@@ -215,7 +228,12 @@ namespace POS.Models
                 int userId = rdr.GetInt32(4);
                 int tableId = rdr.GetInt32(5);
 
-                Ticket newTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
+                Food newFood = Food.Find(foodId);
+                Drink newDrink = Drink.Find(drinkId);
+                User newUser = User.Find(userId);
+                Table newTable = Table.Find(tableId);
+
+                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
                 tickets.Add(newTicket);
             }
 

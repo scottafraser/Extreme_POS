@@ -16,7 +16,7 @@ namespace POS.Models
         public Table Table_Id { get; set; }
         public int Id { get; set; }
 
-        public Ticket(int seatNumber, int food_id, int drink_id, int user_id, int table_id, int id = 0)
+        public Ticket(int seatNumber, Food food_id, Drink drink_id, User user_id, Table table_id, int id = 0)
         {
             SeatNumber = seatNumber;
             Food_Id = food_id;
@@ -149,10 +149,10 @@ namespace POS.Models
 
             cmd.ExecuteNonQuery();
             this.SeatNumber = newSeat;
-            this.Food_Id = newFoodId;
-            this.Drink_Id = newDrinkId;
-            this.User_Id = newUserId;
-            this.Table_Id = newTableId;
+            this.Food_Id = Food.Find(newFoodId);
+            this.Drink_Id = Drink.Find(newDrinkId);
+            this.User_Id = User.Find(newUserId);
+            this.Table_Id = Table.Find(newTableId);
 
             conn.Close();
             if (conn != null)
@@ -183,6 +183,12 @@ namespace POS.Models
             int userId = 0;
             int tableId = 0;
 
+            Food newFood = null; = Food.Find(foodId);
+            Drink newDrink = null; Drink.Find(drinkId);
+            User newUser = null; User.Find(userId);
+            Table newTable = null; Table.Find(tableId);
+
+
             while (rdr.Read())
             {
                 ticketId = rdr.GetInt32(0);
@@ -191,9 +197,14 @@ namespace POS.Models
                 drinkId = rdr.GetInt32(3);
                 userId = rdr.GetInt32(4);
                 tableId = rdr.GetInt32(5);
+
+                newFood = Food.Find(foodId);
+                newDrink = Drink.Find(drinkId);
+                newUser = User.Find(userId);
+                newTable = Table.Find(tableId);
             }
 
-            Ticket foundTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
+            Ticket foundTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
 
             conn.Close();
             if (conn != null)
@@ -219,22 +230,22 @@ namespace POS.Models
 
             MySqlParameter food = new MySqlParameter();
             food.ParameterName = "@Food";
-            food.Value = this.Food_Id;
+            food.Value = this.Food_Id.Id;
             cmd.Parameters.Add(food);
 
             MySqlParameter drink = new MySqlParameter();
             drink.ParameterName = "@Drink";
-            drink.Value = this.Drink_Id;
+            drink.Value = this.Drink_Id.Id;
             cmd.Parameters.Add(drink);
 
             MySqlParameter user = new MySqlParameter();
             user.ParameterName = "@User";
-            user.Value = this.User_Id;
+            user.Value = this.User_Id.Id;
             cmd.Parameters.Add(user);
 
             MySqlParameter table = new MySqlParameter();
             table.ParameterName = "@Table";
-            table.Value = this.Table_Id;
+            table.Value = this.Table_Id.Id;
             cmd.Parameters.Add(table);
 
             cmd.ExecuteNonQuery();
@@ -265,7 +276,14 @@ namespace POS.Models
                 int drinkId = rdr.GetInt32(3);
                 int userId = rdr.GetInt32(4);
                 int tableId = rdr.GetInt32(5);
-                Ticket newTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
+
+                Food newFood = Food.Find(foodId);
+                Drink newDrink = Drink.Find(drinkId);
+                User newUser = User.Find(userId);
+                Table newTable = Table.Find(tableId);
+
+                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
+
                 allTickets.Add(newTicket);
             }
 
