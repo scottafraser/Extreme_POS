@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using POS.Models;
+using POS.ViewModels;
 
 namespace POS.Controllers
 {
@@ -15,9 +16,11 @@ namespace POS.Controllers
         }
 
         [HttpGet("/tickets")]
-        public ActionResult ViewAll()
+        public ActionResult Index()
         {
-            return View(Ticket.GetAll());
+            OrderInfo newOrder = new OrderInfo();
+
+            return View(newOrder);
         }
 
         [HttpPost("/tickets")]
@@ -26,7 +29,7 @@ namespace POS.Controllers
             Ticket newTicket = new Ticket(seatNumber, Food.Find(food_id), Drink.Find(drink_id), POS.Models.User.Find(user_id), Table.Find(table_id));
             newTicket.Save();
 
-            return RedirectToAction("ViewAll");
+            return RedirectToAction("ViewAll", newTicket);
         }
 
         [HttpGet("/ticket/{id}/update")]

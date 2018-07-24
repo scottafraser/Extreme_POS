@@ -11,6 +11,7 @@ namespace POS.ViewModels
 {
     public class OrderInfo
     {
+        public List<Ticket> AllTickets { get; set; }
         public List<Food> AllFood { get; set; }
         public List<Drink> AllDrink { get; set; }
         public List<User> AllUsers { get; set; }
@@ -28,6 +29,7 @@ namespace POS.ViewModels
             AllDrink = Drink.GetAll();
             AllUsers = User.GetAll();
             AllTables = Table.GetAll();
+            AllTickets = Ticket.GetAll();
          
         }
 
@@ -46,7 +48,7 @@ namespace POS.ViewModels
             FoundUser = User.Find(id);
         }
 
-        public void TableDrink(int id)
+        public void FindTable(int id)
         {
             FoundTable = Table.Find(id);
         }
