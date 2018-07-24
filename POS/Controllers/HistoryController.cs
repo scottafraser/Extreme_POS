@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using POS.Models;
 
 namespace POS.Controllers
 {
-    public class HistoryController
+    public class HistoryController : Controller
     {
+        [HttpGet("/history")]
+        public ActionResult ViewAll()
+        {
+            return View(History.GetAll());
+        }
     }
 }
