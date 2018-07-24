@@ -1,7 +1,8 @@
-
-﻿@{
-    ViewData["Title"] = "Drinks";
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Drink Home";
 }
+
 <div>
     <div>
         <p>
@@ -33,3 +34,26 @@
     }
 </div>
 
+
+
+
+<div>
+    <div>
+        <p>
+            <a href="/drink/add">Add New Food Item</a>
+            <span>|</span>
+            <a href="/drink/confirm">Delete Drink Items</a> @*delete all confirm page*@
+        </p>
+    </div>
+</div>
+
+
+<ul class="food-container">
+
+    
+@foreach (var food in Model)
+{
+  <li class="food-item"><a href="/foods/@food.Id/details">@food.Name</a></li>
+}
+
+</ul>

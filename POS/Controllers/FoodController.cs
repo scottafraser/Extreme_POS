@@ -16,7 +16,7 @@ namespace POS.Controllers
         }
 
         [HttpGet("/foods")]
-        public ActionResult ViewAll()
+        public ActionResult Index()
         {
             return View(Food.GetAll());
         }

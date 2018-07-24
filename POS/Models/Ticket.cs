@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace POS.Models
 {
+    #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class Ticket
+    #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         public int SeatNumber { get; set; }
         public Food Food_Id { get; set; }

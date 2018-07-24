@@ -7,7 +7,7 @@ using POS.Models;
 
 namespace POS.Controllers
 {
-    public class DrinkController : Controller
+    public class DrinksController : Controller
     {
         [HttpGet("/drink/add")]
         public ActionResult Create()
@@ -16,7 +16,7 @@ namespace POS.Controllers
         }
 
         [HttpGet("/drinks")]
-        public ActionResult ViewAll()
+        public ActionResult Index()
         {
             return View(Drink.GetAll());
         }

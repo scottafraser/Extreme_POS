@@ -33,7 +33,7 @@ namespace POS.Models
                     Food newFood = (Food)otherFood;
                     bool NameEquality = Name == newFood.Name;
                     bool IdEquality = Id == newFood.Id;
-                    bool PriceEquality = Price == newFood.Price;
+                    bool PriceEquality = Price.Equals(newFood.Price);
                     bool CategoryEquality = Category == newFood.Category;
                     return (IdEquality && NameEquality);
                 }
