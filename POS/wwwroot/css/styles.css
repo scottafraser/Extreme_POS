@@ -20,12 +20,15 @@ body {
         .ui-nav button {width: 100%; height: 100%; }
             .ui-nav:not(:first-child) button { border-left: 1px solid gray;position: absolute;}
         .permissions {display:flex;flex:1;height:100%;}
+            .permissions div {width: 100%}
+
         .nav-selected { background-color: lightblue; border-bottom: none;}
 .tabs { grid-area: tabs-field; }
     .tabs-field { background-color: white; border-bottom: 1px solid gray; border-left: 1px solid gray;}
     .add-tab {position: absolute;right: -1px;bottom: -1px;border: 1px solid black;border-bottom: 2px solid lightblue;z-index: 1;height: 50%; background-color:lightblue;}
 .ui-display { grid-area: ui-display; }
-    .display { height: 100%; background-color: lightblue; display: none;}
+    #tables-display { background: lightblue; background-repeat: no-repeat; background-size: cover;}
+    .display { height: 100%; display: none;}
     .restaurant-grid {
         height: 100%;
         display: grid;
@@ -39,22 +42,23 @@ body {
     .table-2 { grid-area: table-2; }
     .table-3 { grid-area: table-3; }
     .bar { grid-area: bar; }
-    .restaurant-grid div { outline: 1px solid gray;  }
+    .restaurant-grid div { }
         .table-grid {
             height: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr;
             grid-gap: 10px;
-            grid-template-areas: "seat-1 seat-2" "wide-table wide-table" "seat-3 seat-4";
             padding: 10px;
+            grid-template-areas: "seat-1 seat-2" "wide-table wide-table" "seat-3 seat-4";
         }
         .seat-1 { grid-area: seat-1; }
         .seat-2 { grid-area: seat-2; }
         .wide-table { grid-area: wide-table; }
         .seat-3 { grid-area: seat-3; }
         .seat-4 { grid-area: seat-4; }
-        .table-grid div { background: white; }
+
+        .table-grid div, .bar-grid div { background: white; outline: 1px solid gray; }
 
         .bar-grid {
             height: 100%;
@@ -66,8 +70,20 @@ body {
             padding: 10px;
         }
         .bar-table { grid-area: bar-table }
-        .bar-grid div { background: white; }
+
+    .category-grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 10px;
+        padding: 10px;
+        grid-template-areas: "entree appetizer" "maincourse dessert";
+    }
+    .entree { grid-area: entree; } .appetizer { grid-area: appetizer; } .maincourse { grid-area: maincourse; } .dessert { grid-area: dessert; }
 
         .label { position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 .ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray;}
 .footer { grid-area: footer; background-color:lightblue; border-top: 1px solid gray;}
+
+.btn-link, .btn-link:hover, .btn-link:focus { text-decoration: none; color: black; }

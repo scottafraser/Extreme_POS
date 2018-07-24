@@ -8,8 +8,12 @@ var menuDisplay = function() {
 
 var menuNav = function() {
     $(".menu button").click(function() {
-        $(this).parent().siblings().removeClass("selected");
-        $(this).parent().addClass("selected");
+        $(this).parent().siblings().removeClass("nav-selected");
+        $(this).parent().addClass("nav-selected");
+    });
+    $(".permissions button").click(function() {
+        $(this).parent().siblings().removeClass("nav-selected");
+        $(this).parent().addClass("nav-selected");
     });
 }
 

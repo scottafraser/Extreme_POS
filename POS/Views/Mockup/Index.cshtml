@@ -17,8 +17,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
         <!-- wwwroot -->
-        <link href="~/css/site.css" rel="stylesheet">
-        <link href="~/css/items.css" rel="stylesheet">
         <link href="~/css/styles.css" rel="stylesheet">
         <script type="text/javascript" src="~/js/scripts.js"></script>
 
@@ -33,8 +31,12 @@
             <div class="navigation grid-piece">
                 <div class="ui-nav">
                     <div class="permissions">
-                        <button id="server" type="button" class="btn btn-link btn-sm">Server</button>                 
-                        <button id="admin" type="button" class="btn btn-link btn-sm">Admin</button>
+                        <div>
+                            <button id="server" type="button" class="btn btn-link btn-sm">Server</button>  
+                        </div>
+                        <div>
+                            <button id="admin" type="button" class="btn btn-link btn-sm">Admin</button>
+                        </div>
                     </div>
                 </div>
                 <div class="ui-nav menu"><button id="tables" type="button" class="btn btn-link btn-sm">Tables</button></div>
@@ -44,7 +46,7 @@
 
             <!-- Tabs -->
             <div class="tabs-field grid-piece">
-                <div class="add-tab"><button type="button" class="btn btn-link btn-sm">+</button></div>
+                
             </div>
 
             <!-- User Interface --> 
@@ -95,7 +97,44 @@
                 
                 <!-- Food -->
                 <div id="food-display" class="display">
-                        
+                    <div class="category-grid">
+                        <div class="food-grid">
+                            <div class="category-item entree"><span class="label">Entrées</span></div>
+                            <div class="food-item food-1"><span class="label">Food 1</span></div>
+                            <div class="food-item food-2"><span class="label">Food 2</span></div>
+                            <div class="food-item food-3"><span class="label">Food 3</span></div>
+                            <div class="food-item food-4"><span class="label">Food 4</span></div>
+                            <div class="food-item food-5"><span class="label">Food 5</span></div>
+                            <div class="food-item food-6"><span class="label">Food 6</span></div>
+                        </div>
+                        <div class="food-grid">
+                            <div class="category-item appetizer"><span class="label">Appetizers</span></div>
+                            <div class="food-item food-1"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-2"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-3"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-4"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-5"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-6"><span class="label">Seat 1</span></div>
+                        </div>
+                        <div class="food-grid">
+                            <div class="category-item maincourse"><span class="label">Main Courses</span></div>
+                            <div class="food-item food-1"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-2"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-3"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-4"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-5"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-6"><span class="label">Seat 1</span></div>
+                        </div>
+                        <div class="food-grid">
+                            <div class="category-item dessert"><span class="label">Desserts & Cheeses</span></div>
+                            <div class="food-item food-1"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-2"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-3"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-4"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-5"><span class="label">Seat 1</span></div>
+                            <div class="food-item food-6"><span class="label">Seat 1</span></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Drinks -->
@@ -106,10 +145,12 @@
             </div>
 
             <!-- Ticket --> 
-            <div class="ticket-display grid-piece">ticket-display</div>
+            <div class="ticket-display grid-piece">
+
+            </div>
 
             <!-- Footer --> 
-            <div class="footer grid-piece">footer</div>
+            <div class="footer grid-piece"></div>
             
         </div>
     </body>
