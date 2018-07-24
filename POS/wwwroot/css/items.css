@@ -20,7 +20,7 @@
     line-height: 150px;
     color: white;
     font-weight: bold;
-    font-size: 3em;
+    font-size: 2em;
     text-align: center
 }
 
@@ -42,10 +42,10 @@
     margin: 0.5em
 }
 
-    .circle:hover {
-        background-color: lightred;
-        border-style: none
-    }
+.circle:hover {
+    background-color: lightred;
+    border-style: none
+}
 
 .aligner {
     display: flex;
