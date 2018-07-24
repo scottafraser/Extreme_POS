@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
 using System.Linq;
@@ -8,33 +8,33 @@ using Microsoft.AspNetCore.Http;
 
 namespace POS.Models
 {
-    public class Drink
+    public class Mod
     {
         public string Name { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
         public string Category { get; set; }
         public int Id { get; set; }
 
-        public Drink(string name, double price, string category, int id = 0)
+        public Mod(string name, int price, string category, int id = 0)
         {
             Name = name;
             Price = price;
             Category = category;
             Id = id;
         }
-        public override bool Equals(System.Object otherDrink)
+        public override bool Equals(System.Object otherMod)
         {
-            if (!(otherDrink is Drink))
+            if (!(otherMod is Mod))
             {
                 return false;
             }
             else
             {
-                Drink newDrink = (Drink)otherDrink;
-                bool NameEquality = Name == newDrink.Name;
-                bool IdEquality = Id == newDrink.Id;
-                bool PriceEquality = Price.Equals(newDrink.Price);
-                bool CategoryEquality = Category == newDrink.Category;
+                Mod newMod = (Mod)otherMod;
+                bool NameEquality = Name == newMod.Name;
+                bool IdEquality = Id == newMod.Id;
+                bool PriceEquality = Price == newMod.Price;
+                bool CategoryEquality = Category == newMod.Category;
                 return (IdEquality && NameEquality);
             }
         }
@@ -50,7 +50,7 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO drinks (name, price, category) VALUES (@Name, @Price, @Category);";
+            cmd.CommandText = @"INSERT INTO mods (name, price, category) VALUES (@Name, @Price, @Category);";
 
             cmd.Parameters.AddWithValue("@Name", this.Name);
             cmd.Parameters.AddWithValue("@Price", this.Name);
@@ -66,59 +66,59 @@ namespace POS.Models
 
         }
 
-        public static List<Drink> GetAll()
+        public static List<Mod> GetAll()
         {
-            List<Drink> allDrinks = new List<Drink> { };
+            List<Mod> allMods = new List<Mod> { };
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM drinks;";
+            cmd.CommandText = @"SELECT * FROM mods;";
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while (rdr.Read())
             {
-                int DrinkId = rdr.GetInt32(0);
-                string DrinkName = rdr.GetString(1);
-                double DrinkPrice = rdr.GetDouble(2);
-                string DrinkCategory = rdr.GetString(3);
-                Drink newDrink = new Drink(DrinkName, DrinkPrice, DrinkCategory, DrinkId);
-                allDrinks.Add(newDrink);
+                int ModId = rdr.GetInt32(0);
+                string ModName = rdr.GetString(1);
+                int ModPrice = rdr.GetInt32(2);
+                string ModCategory = rdr.GetString(3);
+                Mod newMod = new Mod(ModName, ModPrice, ModCategory, ModId);
+                allMods.Add(newMod);
             }
             conn.Close();
             if (conn != null)
             {
                 conn.Dispose();
             }
-            return allDrinks;
+            return allMods;
         }
-        public static Drink Find(int id)
+        public static Mod Find(int id)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM drinks WHERE id = (@searchId);";
+            cmd.CommandText = @"SELECT * FROM mods WHERE id = (@searchId);";
 
             cmd.Parameters.AddWithValue("@searchId", id);
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
-            int DrinkId = 0;
-            string DrinkName = "";
-            double DrinkPrice = 0;
-            string DrinkCategory = "";
+            int ModId = 0;
+            string ModName = "";
+            int ModPrice = 0;
+            string ModCategory = "";
 
             while (rdr.Read())
             {
-                DrinkId = rdr.GetInt32(0);
-                DrinkName = rdr.GetString(1);
-                DrinkPrice = rdr.GetDouble(2);
-                DrinkCategory = rdr.GetString(3);
+                ModId = rdr.GetInt32(0);
+                ModName = rdr.GetString(1);
+                ModPrice = rdr.GetInt32(2);
+                ModCategory = rdr.GetString(3);
             }
-            Drink newDrink = new Drink(DrinkName, DrinkPrice, DrinkCategory, DrinkId);
+            Mod newMod = new Mod(ModName, ModPrice, ModCategory, ModId);
             conn.Close();
             if (conn != null)
             {
                 conn.Dispose();
             }
-            return newDrink;
+            return newMod;
         }
 
         public static void DeleteAll()
@@ -126,7 +126,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM drinks;";
+            cmd.CommandText = @"DELETE FROM mods;";
             cmd.ExecuteNonQuery();
             conn.Close();
             if (conn != null)
@@ -135,12 +135,12 @@ namespace POS.Models
             }
         }
 
-        public void Edit(string newName, double newPrice, string newCategory)
+        public void Edit(string newName, int newPrice, string newCategory)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE drinks SET name = @newName, price = @newPrice, newCategory = @newCategory  WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE mods SET name = @newName, price = @newPrice, newCategory = @newCategory  WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
@@ -169,7 +169,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM drinks WHERE Id = @searchId;";
+            cmd.CommandText = @"DELETE FROM mods WHERE Id = @searchId;";
 
             cmd.Parameters.AddWithValue("@searchId", this.Id);
 

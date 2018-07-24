@@ -25,7 +25,9 @@ body {
     .tabs-field { background-color: white; border-bottom: 1px solid gray;}
     .add-tab {position: absolute;right: -1px;b ottom: 0px;bottom: 0;border: 1px solid black;border-bottom: 2px solid lightblue;z-index: 1;height: 50%; background-color:lightblue;}
 .ui-display { grid-area: ui-display; }
+
     .display { height: 100%; background-color: lightblue; display: none;}
 .ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray;}
 .footer { grid-area: footer; background-color:lightblue; border-top: 1px solid gray;}
+
 

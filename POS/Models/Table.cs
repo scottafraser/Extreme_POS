@@ -11,11 +11,13 @@ namespace POS.Models
     {
         public int Number { get; set; }
         public int Id { get; set; }
+        public int Seats { get; set; }
 
-        public Table(int number, int id = 0)
+        public Table(int number, int seats, int id = 0)
         {
             Number = number;
             Id = id;
+            Seats = seats;
         }
 
         public override bool Equals(System.Object otherTable)
@@ -75,13 +77,13 @@ namespace POS.Models
             }
         }
 
-        public void Edit(int newNumber)
+        public void Edit(int newNumber, int newSeats)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId; UPDATE tables SET seats = @newSeats WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
@@ -92,6 +94,11 @@ namespace POS.Models
             number.ParameterName = "@newNumber";
             number.Value = newNumber;
             cmd.Parameters.Add(number);
+
+            MySqlParameter seats = new MySqlParameter();
+            seats.ParameterName = "@newSeats";
+            seats.Value = newSeats;
+            cmd.Parameters.Add(seats);
 
             cmd.ExecuteNonQuery();
             this.Number = newNumber;
@@ -120,14 +127,16 @@ namespace POS.Models
 
             int tableId = 0;
             int tableNum = 0;
+            int tableSeats = 0;
 
             while (rdr.Read())
             {
                 tableId = rdr.GetInt32(0);
                 tableNum = rdr.GetInt32(1);
+                tableSeats = rdr.GetInt32(2);
             }
 
-            Table foundTable = new Table(tableNum, tableId);
+            Table foundTable = new Table(tableNum, tableSeats, tableId);
 
             conn.Close();
             if (conn != null)
@@ -144,12 +153,17 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tables (number) VALUES (@number);";
+            cmd.CommandText = @"INSERT INTO tables (number, seats) VALUES (@number, @seats);";
 
             MySqlParameter number = new MySqlParameter();
-            number.ParameterName = "@stylistName";
+            number.ParameterName = "@number";
             number.Value = this.Number;
             cmd.Parameters.Add(number);
+
+            MySqlParameter seats = new MySqlParameter();
+            seats.ParameterName = "@seats";
+            seats.Value = this.Seats;
+            cmd.Parameters.Add(seats);
 
             cmd.ExecuteNonQuery();
             Id = (int)cmd.LastInsertedId;
@@ -175,7 +189,8 @@ namespace POS.Models
             {
                 int tableId = rdr.GetInt32(0);
                 int tableNum = rdr.GetInt32(1);
-                Table newTable = new Table(tableNum, tableId);
+                int tableSeats = rdr.GetInt32(2);
+                Table newTable = new Table(tableNum, tableSeats, tableId);
                 allTables.Add(newTable);
             }
 
@@ -213,7 +228,12 @@ namespace POS.Models
                 int userId = rdr.GetInt32(4);
                 int tableId = rdr.GetInt32(5);
 
-                Ticket newTicket = new Ticket(seatNum, foodId, drinkId, userId, tableId, ticketId);
+                Food newFood = Food.Find(foodId);
+                Drink newDrink = Drink.Find(drinkId);
+                User newUser = User.Find(userId);
+                Table newTable = Table.Find(tableId);
+
+                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
                 tickets.Add(newTicket);
             }
 
@@ -224,6 +244,36 @@ namespace POS.Models
             }
 
             return tickets;
+        }
+
+        public int GetRemainingSeats()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT seats FROM tables WHERE id = @searchId;";
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int remainingSeats = 0;
+
+            while (rdr.Read())
+            {
+                remainingSeats = rdr.GetInt32(0);
+            }
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return remainingSeats;
         }
     }
 }

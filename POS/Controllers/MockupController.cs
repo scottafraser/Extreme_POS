@@ -18,9 +18,11 @@ namespace POS.Controllers
         }
 
 
+
         public IActionResult TestPull()
         {
             return View(Food.GetAll());
         }
+
     }
 }
