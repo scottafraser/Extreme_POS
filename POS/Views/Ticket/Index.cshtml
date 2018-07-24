@@ -1,7 +1,13 @@
-
-<div class="container">
-    <h5 class="card-title"><strong>Server</strong> Server Name</h5>
-    <h5 class="card-title"><strong>Table Number</strong> #</h5>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "TICKET";
+}
+    @foreach (var ticket in Model.AllTickets)
+    {
+     <h5 class="card-title"><strong>Server</strong>@ticket.User_Id.Name</h5>
+    
+   
+    <h5 class="card-title"><strong>Table Number</strong>@ticket.Table_Id.Number</h5>
     <hr>
     <!-- repeat this table for every seat -->
     <div class="card" style="width: 25rem;">
@@ -13,7 +19,7 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-sm-8">
-                        <a href="#">Menu Item</a>
+                        <a href="#"></a>
                     </div>
                     <div class="col-sm-4">
                         $15
@@ -45,4 +51,5 @@
     <div class="">
         <a href="#" class="btn btn-primary">Order</a> <a href="#" class="btn btn-primary">Cancel</a> <a href="#" class="btn btn-primary">Another Option</a>
     </div>
-</div>
+
+    }

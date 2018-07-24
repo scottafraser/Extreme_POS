@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using POS.Models;
+using POS.ViewModels;
 
 namespace POS.Controllers
 {
@@ -40,9 +41,11 @@ namespace POS.Controllers
         }
 
         [HttpPost("/foods/{id}/order")]
-        public ActionResult Order(int id)
+        public ActionResult Order(int id, int serverid, int tableid)
         {
             Food foodDetails = Food.Find(id);
+            OrderInfo newOrder = new OrderInfo(); 
+
 
             return View("Index");
         }
@@ -71,4 +74,5 @@ namespace POS.Controllers
         }
     }
 }
+
 
