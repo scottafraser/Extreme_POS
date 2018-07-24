@@ -10,10 +10,10 @@ namespace POS.Models
     public class Ticket
     {
         public int SeatNumber { get; set; }
-        public int Food_Id { get; set; }
-        public int Drink_Id { get; set; }
-        public int User_Id { get; set; }
-        public int Table_Id { get; set; }
+        public Food Food_Id { get; set; }
+        public Drink Drink_Id { get; set; }
+        public User User_Id { get; set; }
+        public Table Table_Id { get; set; }
         public int Id { get; set; }
 
         public Ticket(int seatNumber, int food_id, int drink_id, int user_id, int table_id, int id = 0)

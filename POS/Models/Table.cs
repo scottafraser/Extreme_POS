@@ -11,11 +11,13 @@ namespace POS.Models
     {
         public int Number { get; set; }
         public int Id { get; set; }
+        public int Seats { get; set; }
 
-        public Table(int number, int id = 0)
+        public Table(int number, int seats, int id = 0)
         {
             Number = number;
             Id = id;
+            Seats = seats;
         }
 
         public override bool Equals(System.Object otherTable)
@@ -75,13 +77,13 @@ namespace POS.Models
             }
         }
 
-        public void Edit(int newNumber)
+        public void Edit(int newNumber, int newSeats)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId; UPDATE tables SET seats = @newSeats WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
