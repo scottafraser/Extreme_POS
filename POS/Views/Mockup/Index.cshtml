@@ -15,6 +15,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
         <!-- wwwroot -->
+        <link href="~/css/site.css" rel="stylesheet">
+        <link href="~/css/items.css" rel="stylesheet">
         <link href="~/css/styles.css" rel="stylesheet">
         <script type="text/javascript" src="~/js/scripts.js"></script>
         
@@ -31,8 +33,10 @@
                     </div>
                 </div>
                 <div class="ui-nav menu"><button id="tables" type="button" class="btn btn-link btn-sm">Tables</button></div>
-                <div class="ui-nav menu"><button id="food" type="button" class="btn btn-link btn-sm">Food</button></div>
-                <div class="ui-nav menu"><button id="drinks" class="btn btn-link btn-sm">Drinks</button></div>
+                <div class="ui-nav menu">
+                    <a href="/foods"><button id="food" type="button" class="btn btn-link btn-sm">Food</button></a></div>
+                <div class="ui-nav menu">
+                <a href="/drinks"><button id="drinks" class="btn btn-link btn-sm">Drinks</button></a></div>
             </div>
 
             <!-- Tabs -->
@@ -42,7 +46,7 @@
 
             <!-- User Interface --> 
             <div class="ui-display grid-piece">
-            <div id="tables-display" class="display">Tables</div>
+            <div id="tables-display" class="display">@Html.Partial("~/Views/Table/Map.cshtml")</div>
             <div id="food-display" class="display">Food</div>
             <div id="drinks-display" class="display">Drinks</div>
             </div>

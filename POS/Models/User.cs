@@ -230,43 +230,43 @@ namespace POS.Models
             return allUsers;
         }
 
-        public List<Ticket> GetTickets()
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT tickets WHERE user_id = @userId;";
+        //public List<Ticket> GetTickets()
+        //{
+        //    MySqlConnection conn = DB.Connection();
+        //    conn.Open();
+        //    var cmd = conn.CreateCommand() as MySqlCommand;
+        //    cmd.CommandText = @"SELECT tickets WHERE user_id = @userId;";
 
-            MySqlParameter userIdParameter = new MySqlParameter();
-            userIdParameter.ParameterName = "@userId";
-            userIdParameter.Value = Id;
-            cmd.Parameters.Add(userIdParameter);
+        //    MySqlParameter userIdParameter = new MySqlParameter();
+        //    userIdParameter.ParameterName = "@userId";
+        //    userIdParameter.Value = Id;
+        //    cmd.Parameters.Add(userIdParameter);
 
-            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        //    var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-            List<Ticket> tickets = new List<Ticket> { };
+        //    List<Ticket> tickets = new List<Ticket> { };
 
-            while (rdr.Read())
-            {
-                int ticketId = rdr.GetInt32(0);
-                int seatNumber = rdr.GetInt32(1);
-                int foodId = rdr.GetInt32(2);
-                int drinkId = rdr.GetInt32(3);
-                int userId = rdr.GetInt32(4);
-                int tableId = rdr.GetInt32(5);
+        //    while (rdr.Read())
+        //    {
+        //        int ticketId = rdr.GetInt32(0);
+        //        int seatNumber = rdr.GetInt32(1);
+        //        int foodId = rdr.GetInt32(2);
+        //        int drinkId = rdr.GetInt32(3);
+        //        int userId = rdr.GetInt32(4);
+        //        int tableId = rdr.GetInt32(5);
 
 
-                Ticket newTicket = new Ticket(seatNumber, foodId, drinkId, userId, tableId, ticketId);
-                tickets.Add(newTicket);
-            }
+        //        Ticket newTicket = new Ticket(seatNumber, foodId, drinkId, userId, tableId, ticketId);
+        //        tickets.Add(newTicket);
+        //    }
 
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
+        //    conn.Close();
+        //    if (conn != null)
+        //    {
+        //        conn.Dispose();
+        //    }
 
-            return tickets;
-        }
+        //    return tickets;
+        //}
     }
 }
