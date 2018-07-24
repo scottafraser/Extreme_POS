@@ -1,0 +1,19 @@
+﻿<div class="row">
+    @foreach (var food in Model) {
+    
+    <div class="col">
+        <strong><a href="/food/@food.Id/details">@food.Name</a></strong>
+    </div>
+    <div>
+        <strong>@food.Price</strong>
+    </div>
+    <div>
+        <small><a href="/food/@food.Id/Update">Update</a></small><span> | </span>
+    </div>
+    <div>
+        <small><a href="/food/@food.Id/delete">Delete</a></small>
+    </div>
+    <div class="col"></div>
+    <hr />
+    }
+</div>

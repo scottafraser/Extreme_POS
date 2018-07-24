@@ -8,4 +8,15 @@ var menuNav = function() {
 
 $(function() {
     menuNav();
+
+    $('.menu button').click(function () {
+      $.ajax({
+        type: 'GET',
+        url: '/Mockup/TestPull',
+        success: function (result) {
+          $('#food-display').append(result);
+        }
+      });
+    });
+
 });
