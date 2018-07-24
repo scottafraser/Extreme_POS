@@ -11,11 +11,11 @@ namespace POS.Models
     public class Drink
     {
         public string Name { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public string Category { get; set; }
         public int Id { get; set; }
 
-        public Drink(string name, int price, string category, int id = 0)
+        public Drink(string name, double price, string category, int id = 0)
         {
             Name = name;
             Price = price;
@@ -78,7 +78,7 @@ namespace POS.Models
             {
                 int DrinkId = rdr.GetInt32(0);
                 string DrinkName = rdr.GetString(1);
-                int DrinkPrice = rdr.GetInt32(2);
+                double DrinkPrice = rdr.GetDouble(2);
                 string DrinkCategory = rdr.GetString(3);
                 Drink newDrink = new Drink(DrinkName, DrinkPrice, DrinkCategory, DrinkId);
                 allDrinks.Add(newDrink);
@@ -102,14 +102,14 @@ namespace POS.Models
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             int DrinkId = 0;
             string DrinkName = "";
-            int DrinkPrice = 0;
+            double DrinkPrice = 0;
             string DrinkCategory = "";
 
             while (rdr.Read())
             {
                 DrinkId = rdr.GetInt32(0);
                 DrinkName = rdr.GetString(1);
-                DrinkPrice = rdr.GetInt32(2);
+                DrinkPrice = rdr.GetDouble(2);
                 DrinkCategory = rdr.GetString(3);
             }
             Drink newDrink = new Drink(DrinkName, DrinkPrice, DrinkCategory, DrinkId);
@@ -135,7 +135,7 @@ namespace POS.Models
             }
         }
 
-        public void Edit(string newName, int newPrice, string newCategory)
+        public void Edit(string newName, double newPrice, string newCategory)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();

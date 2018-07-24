@@ -249,14 +249,18 @@ namespace POS.Models
             while (rdr.Read())
             {
                 int ticketId = rdr.GetInt32(0);
-                int seatNumber = rdr.GetInt32(1);
+                int seatNum = rdr.GetInt32(1);
                 int foodId = rdr.GetInt32(2);
                 int drinkId = rdr.GetInt32(3);
                 int userId = rdr.GetInt32(4);
                 int tableId = rdr.GetInt32(5);
 
+                Food newFood = Food.Find(foodId);
+                Drink newDrink = Drink.Find(drinkId);
+                User newUser = User.Find(userId);
+                Table newTable = Table.Find(tableId);
 
-                Ticket newTicket = new Ticket(seatNumber, foodId, drinkId, userId, tableId, ticketId);
+                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
                 tickets.Add(newTicket);
             }
 

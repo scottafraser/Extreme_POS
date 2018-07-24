@@ -11,11 +11,11 @@ namespace POS.Models
         public class Food
         {
             public string Name { get; set; }
-            public int Price { get; set; }
+            public double Price { get; set; }
             public string Category { get; set; }
             public int Id { get; set; }
 
-            public Food(string name, int price, string category, int id = 0)
+            public Food(string name, double price, string category, int id = 0)
             {
                 Name = name;
                 Price = price;
@@ -78,7 +78,7 @@ namespace POS.Models
                 {
                     int FoodId = rdr.GetInt32(0);
                     string FoodName = rdr.GetString(1);
-                    int FoodPrice = rdr.GetInt32(2);
+                    double FoodPrice = rdr.GetDouble(2);
                     string FoodCategory = rdr.GetString(3);
                     Food newFood = new Food(FoodName, FoodPrice, FoodCategory, FoodId);
                     allFood.Add(newFood);
@@ -102,14 +102,14 @@ namespace POS.Models
                 var rdr = cmd.ExecuteReader() as MySqlDataReader;
                 int FoodId = 0;
                 string FoodName = "";
-                int FoodPrice = 0;
+                double FoodPrice = 0;
                 string FoodCategory = "";
 
                 while (rdr.Read())
                 {
                     FoodId = rdr.GetInt32(0);
                     FoodName = rdr.GetString(1);
-                    FoodPrice = rdr.GetInt32(2);
+                    FoodPrice = rdr.GetDouble(2);
                     FoodCategory = rdr.GetString(3);
                 }
                 Food newFood = new Food(FoodName, FoodPrice, FoodCategory, FoodId);
@@ -135,7 +135,7 @@ namespace POS.Models
                 }
             }
 
-            public void Edit(string newName, int newPrice, string newCategory)
+            public void Edit(string newName, double newPrice, string newCategory)
             {
                 MySqlConnection conn = DB.Connection();
                 conn.Open();

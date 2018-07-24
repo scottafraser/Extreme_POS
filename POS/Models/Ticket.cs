@@ -188,10 +188,10 @@ namespace POS.Models
             int userId = 0;
             int tableId = 0;
 
-            Food newFood = null; = Food.Find(foodId);
-            Drink newDrink = null; Drink.Find(drinkId);
-            User newUser = null; User.Find(userId);
-            Table newTable = null; Table.Find(tableId);
+            Food newFood = null;
+            Drink newDrink = null;
+            User newUser = null;
+            Table newTable = null;
 
 
             while (rdr.Read())
