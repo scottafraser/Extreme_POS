@@ -245,6 +245,36 @@ namespace POS.Models
 
             return tickets;
         }
+
+        public int GetRemainingSeats()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT seats FROM tables WHERE id = @searchId;";
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int remainingSeats = 0;
+
+            while (rdr.Read())
+            {
+                remainingSeats = rdr.GetInt32(0);
+            }
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return remainingSeats;
+        }
     }
 }
 

@@ -83,18 +83,23 @@ namespace POS.Models
             }
         }
 
-        public static void RemoveLineItem(Ticket existingTicket)
+        public static void CloseTicket(Ticket existingTicket)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM tickets WHERE id = @searchId;";
+            cmd.CommandText = @"DELETE FROM tickets WHERE id = @searchId; UPDATE tables SET seats = seats + 1 WHERE tables.id = @Table;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
             searchId.Value = existingTicket.Id;
             cmd.Parameters.Add(searchId);
+
+            MySqlParameter tableId = new MySqlParameter();
+            tableId.ParameterName = "@Table";
+            tableId.Value = existingTicket.Table_Id.Id;
+            cmd.Parameters.Add(tableId);
 
             cmd.ExecuteNonQuery();
 
@@ -221,7 +226,7 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (seat_number, food_id, drink_id, user_id, table_id) VALUES (@Seat, @Food, @Drink, @User, @Table);";
+            cmd.CommandText = @"INSERT INTO tickets (seat_number, food_id, drink_id, user_id, table_id) VALUES (@Seat, @Food, @Drink, @User, @Table); UPDATE tables SET seats = seats - 1 WHERE tables.id = @Table;";
 
             MySqlParameter seat = new MySqlParameter();
             seat.ParameterName = "@Seat";
