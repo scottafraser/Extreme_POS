@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 23, 2018 at 10:57 PM
+-- Generation Time: Jul 24, 2018 at 04:08 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `POS`
 --
+CREATE DATABASE IF NOT EXISTS `POS` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `POS`;
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,8 @@ CREATE TABLE `history` (
 
 CREATE TABLE `tables` (
   `id` int(11) NOT NULL,
-  `number` int(11) NOT NULL
+  `number` int(11) NOT NULL,
+  `seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
