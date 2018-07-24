@@ -1,4 +1,10 @@
-﻿<div>
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Food Home";
+}
+
+
+<div>
     <div>
         <p>
             <a href="/stylist/add">Add New Food Item</a>
@@ -7,24 +13,14 @@
         </p>
     </div>
 </div>
-<div class="row">
-    @{
-    foreach (var food in Model)
-    {
-    <div class="col-md-2">
-        <strong><a href="/food/@food.Id/details">@food.Name</a></strong>
-    </div>
-    <div>
-        <strong>@food.Price</strong>
-    </div>
-    <div>
-        <small><a href="/food/@food.Id/Update">Update</a></small><span> | </span>
-    </div>
-    <div>
-        <small><a href="/food/@food.Id/delete">Delete</a></small>
-    </div>
-    <div class="col-md-9"></div>
-    <hr />
-    }
-    }
-</div>
+
+
+<ul class="food-container">
+
+    
+@foreach (var food in Model)
+{
+  <li class="food-item"><a href="/foods/@food.Id/details">@food.Name</a></li>
+}
+
+</ul>

@@ -15,5 +15,7 @@ namespace POS.Controllers
         {
             return View();
         }
+
+
     }
 }
