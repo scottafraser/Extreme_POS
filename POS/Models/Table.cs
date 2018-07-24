@@ -275,6 +275,76 @@ namespace POS.Models
 
             return remainingSeats;
         }
+
+        public double TableValue()
+        {
+            double total = 0.00;
+
+            foreach(Ticket ticket in GetTickets())
+            {
+                total += ticket.Food_Id.Price;
+                total += ticket.Drink_Id.Price;
+            }
+
+            return total;
+        }
+
+        public int TableItems()
+        {
+            int items = 0;
+
+            foreach (Ticket ticket in GetTickets())
+            {
+                if(ticket.Food_Id != null)
+                {
+                    items++;
+                }
+
+                if (ticket.Drink_Id != null)
+                {
+                    items++;
+                }
+            }
+
+            return items;
+        }
+
+        public void SellTable()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO history (table_id, items, value) VALUES (@table, @items, @value);";
+
+            MySqlParameter table = new MySqlParameter();
+            table.ParameterName = "@table";
+            table.Value = Id;
+            cmd.Parameters.Add(table);
+
+            MySqlParameter items = new MySqlParameter();
+            items.ParameterName = "@items";
+            items.Value = TableItems();
+            cmd.Parameters.Add(items);
+
+            MySqlParameter value = new MySqlParameter();
+            value.ParameterName = "@value";
+            value.Value = TableValue();
+            cmd.Parameters.Add(value);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            foreach (Ticket ticket in GetTickets())
+            {
+                Ticket.CloseTicket(ticket);
+            }
+        }
     }
 }
 
