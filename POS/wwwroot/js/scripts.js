@@ -30,7 +30,7 @@ var menu
 $(function() {
     menuNav();
     menuDisplay();
-    testAjax();
+
 
 
 });

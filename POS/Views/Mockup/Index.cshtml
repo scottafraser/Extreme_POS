@@ -1,10 +1,9 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Mockxup</title>
+        <title>Mockup</title>
 
         <!-- Repository for reference -->
         <!-- https://github.com/scottafraser/Extreme_POS.git-->
@@ -39,10 +38,8 @@
                     </div>
                 </div>
                 <div class="ui-nav menu"><button id="tables" type="button" class="btn btn-link btn-sm">Tables</button></div>
-                <div class="ui-nav menu">
-                    <a href="/foods"><button id="food" type="button" class="btn btn-link btn-sm">Food</button></a></div>
-                <div class="ui-nav menu">
-                <a href="/drinks"><button id="drinks" class="btn btn-link btn-sm">Drinks</button></a></div>
+                <div class="ui-nav menu"><button id="food" type="button" class="btn btn-link btn-sm">Food</button></div>
+                <div class="ui-nav menu"><button id="drinks" type="button" class="btn btn-link btn-sm">Drinks</button></div>
             </div>
 
             <!-- Tabs -->
@@ -53,10 +50,59 @@
             <!-- User Interface --> 
             <div class="ui-display grid-piece">
 
-            <div id="tables-display" class="display">@Html.Partial("~/Views/Table/Map.cshtml")</div>
-            <div id="food-display" class="display">Food</div>
+                <!-- Tables -->
+                <div id="tables-display" class="display">
+                    <div class="restaurant-grid">
+                        <div class="table-1">
+                            <div class="table-grid">
+                                <div class="seat seat-1"><span class="label">Seat 1</span></div>
+                                <div class="seat seat-2"><span class="label">Seat 2</span></div>
+                                <div class="wide-table"><span class="label">Table 1</span></div>
+                                <div class="seat seat-3"><span class="label">Seat 3</span></div>
+                                <div class="seat seat-4"><span class="label">Seat 4</span></div>
+                            </div>
+                        </div>
+                        <div class="table-2">
+                            <div class="table-grid">
+                                <div class="seat seat-1"><span class="label">Seat 1</span></div>
+                                <div class="seat seat-2"><span class="label">Seat 2</span></div>
+                                <div class="wide-table"><span class="label">Table 2</span></div>
+                                <div class="seat seat-3"><span class="label">Seat 3</span></div>
+                                <div class="seat seat-4"><span class="label">Seat 4</span></div>
+                            </div>
+                        </div>
+                        <div class="table-3">
+                            <div class="table-grid">
+                                <div class="seat seat-1"><span class="label">Seat 1</span></div>
+                                <div class="seat seat-2"><span class="label">Seat 2</span></div>
+                                <div class="wide-table"><span class="label">Table 3</span></div>
+                                <div class="seat seat-3"><span class="label">Seat 3</span></div>
+                                <div class="seat seat-4"><span class="label">Seat 4</span></div>
+                            </div>
+                        </div>
+                        <div class="bar">
+                            <div class="bar-grid">
+                                <div class="seat seat-1"><span class="label">Seat 1</span></div>
+                                <div class="seat seat-2"><span class="label">Seat 2</span></div>
+                                <div class="seat seat-3"><span class="label">Seat 3</span></div>
+                                <div class="seat seat-4"><span class="label">Seat 4</span></div>
+                                <div class="seat seat-5"><span class="label">Seat 5</span></div>
+                                <div class="bar-table"><span class="label">Bar</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Food -->
+                <div id="food-display" class="display">
+                        
+                </div>
+                
+                <!-- Drinks -->
+                <div id="drinks-display" class="display">
 
-            <div id="drinks-display" class="display">Drinks</div>
+                </div>
+                
             </div>
 
             <!-- Ticket --> 
