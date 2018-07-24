@@ -230,6 +230,7 @@ namespace POS.Models
             return allUsers;
         }
 
+        /*
         public List<Ticket> GetTickets()
         {
             MySqlConnection conn = DB.Connection();
@@ -272,6 +273,7 @@ namespace POS.Models
 
             return tickets;
         }
+        */
 
     }
 }
