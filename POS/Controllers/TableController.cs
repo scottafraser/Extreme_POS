@@ -8,13 +8,19 @@ namespace POS.Controllers
 {
     public class TableController : Controller
     {
+        [HttpGet("/table/map")]
+        public ActionResult Map()
+        {
+            return View();
+        }
+
         [HttpGet("/table/add")]
         public ActionResult Create()
         {
             return View();
         }
 
-        [HttpGet("/tables")]
+        [HttpGet("/table")]
         public ActionResult ViewAll()
         {
             return View(Ticket.GetAll());
