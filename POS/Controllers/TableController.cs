@@ -44,10 +44,10 @@ namespace POS.Controllers
         }
 
         [HttpPost("/table/{id}/update")]
-        public ActionResult UpdatePost(int id, int newNumber, int newSeat)
+        public ActionResult UpdatePost(int id, int newNumber)
         {
             Table editTable = Table.Find(id);
-            editTable.Edit(newNumber, newSeat);
+            editTable.Edit(newNumber);
 
             return RedirectToAction("ViewAll");
         }

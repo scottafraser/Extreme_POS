@@ -24,9 +24,9 @@ namespace POS.Controllers
         }
 
         [HttpPost("/tickets")]
-        public ActionResult ViewAllPost(int seatNumber, int food_id, int drink_id, int user_id, int table_id)
+        public ActionResult ViewAllPost(int ticketNumber)
         {
-            Ticket newTicket = new Ticket(seatNumber, Food.Find(food_id), Drink.Find(drink_id), POS.Models.User.Find(user_id), Table.Find(table_id));
+            Ticket newTicket = new Ticket(ticketNumber);
             newTicket.Save();
 
             return RedirectToAction("ViewAll", newTicket);

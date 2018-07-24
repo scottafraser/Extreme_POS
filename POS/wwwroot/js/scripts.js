@@ -49,6 +49,8 @@ var testAjax2 = function() {
     });
 }
 
+
+
 $(function() {
     menuNav();
     menuDisplay();
@@ -56,4 +58,11 @@ $(function() {
     testAjax1();
     testAjax2();
 
+    $.ajax({
+        type: 'GET',
+        url: '/tickets',
+        success: function (result) {
+          $('.ticket-display').html(result);
+        }
+    });
 });
