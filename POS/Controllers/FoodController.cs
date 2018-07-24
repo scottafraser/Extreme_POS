@@ -39,6 +39,14 @@ namespace POS.Controllers
             return View(foodDetails);
         }
 
+        [HttpPost("/foods/{id}/order")]
+        public ActionResult Order(int id)
+        {
+            Food foodDetails = Food.Find(id);
+
+            return View("Index");
+        }
+
         [HttpGet("/foods/{id}/delete")]
         public ActionResult Delete(int id)
         {

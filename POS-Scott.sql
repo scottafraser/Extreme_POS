@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 24, 2018 at 05:26 PM
+-- Generation Time: Jul 24, 2018 at 09:43 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -136,6 +136,13 @@ CREATE TABLE `tables` (
   `seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tables`
+--
+
+INSERT INTO `tables` (`id`, `number`, `seats`) VALUES
+(1, 1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +158,13 @@ CREATE TABLE `tickets` (
   `table_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `seat_number`, `food_id`, `drink_id`, `user_id`, `table_id`) VALUES
+(1, 1, 1, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -162,6 +176,13 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `admin`) VALUES
+(1, 'Jessica', 0);
 
 --
 -- Indexes for dumped tables
@@ -241,19 +262,19 @@ ALTER TABLE `mods`
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

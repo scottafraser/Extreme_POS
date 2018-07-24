@@ -25,6 +25,18 @@ var testAjax = function() {
     });
 }
 
+var testAjax1 = function() {
+    $('.menu button').click(function () {
+      $.ajax({
+        type: 'GET',
+        url: '/drinks',
+        success: function (result) {
+          $('#drinks-display').html(result);
+        }
+      });
+    });
+}
+
 var testAjax2 = function() {
     $('.menu button').click(function () {
       $.ajax({
@@ -41,6 +53,7 @@ $(function() {
     menuNav();
     menuDisplay();
     testAjax();
+    testAjax1();
     testAjax2();
 
 });

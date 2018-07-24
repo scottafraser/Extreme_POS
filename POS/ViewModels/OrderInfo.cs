@@ -13,15 +13,22 @@ namespace POS.ViewModels
     {
         public List<Food> AllFood { get; set; }
         public List<Drink> AllDrink { get; set; }
+        public List<User> AllUsers { get; set; }
+        public List<Table> AllTables { get; set; }
 
         public Food FoundFood { get;  set; }
         public Drink FoundDrink { get; set; }
+        public User FoundUser { get; set; }
+        public Table FoundTable { get; set; }
+
 
         public OrderInfo()
         {
             AllFood = Food.GetAll();
             AllDrink = Drink.GetAll();
-         ;
+            AllUsers = User.GetAll();
+            AllTables = Table.GetAll();
+         
         }
 
         public void FindFood(int id)
@@ -32,6 +39,16 @@ namespace POS.ViewModels
         public void FindDrink(int id)
         {
             FoundDrink = Drink.Find(id);
+        }
+
+        public void FindUser(int id)
+        {
+            FoundUser = User.Find(id);
+        }
+
+        public void TableDrink(int id)
+        {
+            FoundTable = Table.Find(id);
         }
 
   

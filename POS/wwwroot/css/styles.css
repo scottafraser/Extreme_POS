@@ -30,4 +30,4 @@ body {
 .ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray;}
 .footer { grid-area: footer; background-color:lightblue; border-top: 1px solid gray;}
 
-
+.tables-display { overflow: hidden; }
