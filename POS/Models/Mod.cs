@@ -50,7 +50,7 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO mod (name, price, category) VALUES (@Name, @Price, @Category);";
+            cmd.CommandText = @"INSERT INTO mods (name, price, category) VALUES (@Name, @Price, @Category);";
 
             cmd.Parameters.AddWithValue("@Name", this.Name);
             cmd.Parameters.AddWithValue("@Price", this.Name);
@@ -72,7 +72,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM mod;";
+            cmd.CommandText = @"SELECT * FROM mods;";
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while (rdr.Read())
             {
@@ -95,7 +95,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM mod WHERE id = (@searchId);";
+            cmd.CommandText = @"SELECT * FROM mods WHERE id = (@searchId);";
 
             cmd.Parameters.AddWithValue("@searchId", id);
 
@@ -126,7 +126,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM mod;";
+            cmd.CommandText = @"DELETE FROM mods;";
             cmd.ExecuteNonQuery();
             conn.Close();
             if (conn != null)
@@ -140,7 +140,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE mod SET name = @newName, price = @newPrice, newCategory = @newCategory  WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE mods SET name = @newName, price = @newPrice, newCategory = @newCategory  WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
@@ -169,7 +169,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM mod WHERE Id = @searchId;";
+            cmd.CommandText = @"DELETE FROM mods WHERE Id = @searchId;";
 
             cmd.Parameters.AddWithValue("@searchId", this.Id);
 
