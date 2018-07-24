@@ -11,13 +11,11 @@ namespace POS.Models
     {
         public int Number { get; set; }
         public int Id { get; set; }
-        public int Seats { get; set; }
 
-        public Table(int number, int seats, int id = 0)
+        public Table(int number, int id = 0)
         {
             Number = number;
             Id = id;
-            Seats = seats;
         }
 
         public override bool Equals(System.Object otherTable)
@@ -77,13 +75,13 @@ namespace POS.Models
             }
         }
 
-        public void Edit(int newNumber, int newSeats)
+        public void Edit(int newNumber)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId; UPDATE tables SET seats = @newSeats WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tables SET number = @newNumber WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
@@ -94,11 +92,6 @@ namespace POS.Models
             number.ParameterName = "@newNumber";
             number.Value = newNumber;
             cmd.Parameters.Add(number);
-
-            MySqlParameter seats = new MySqlParameter();
-            seats.ParameterName = "@newSeats";
-            seats.Value = newSeats;
-            cmd.Parameters.Add(seats);
 
             cmd.ExecuteNonQuery();
             this.Number = newNumber;
@@ -127,16 +120,14 @@ namespace POS.Models
 
             int tableId = 0;
             int tableNum = 0;
-            int tableSeats = 0;
 
             while (rdr.Read())
             {
                 tableId = rdr.GetInt32(0);
                 tableNum = rdr.GetInt32(1);
-                tableSeats = rdr.GetInt32(2);
             }
 
-            Table foundTable = new Table(tableNum, tableSeats, tableId);
+            Table foundTable = new Table(tableNum, tableId);
 
             conn.Close();
             if (conn != null)
@@ -153,17 +144,12 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tables (number, seats) VALUES (@number, @seats);";
+            cmd.CommandText = @"INSERT INTO tables (number) VALUES (@number);";
 
             MySqlParameter number = new MySqlParameter();
             number.ParameterName = "@number";
             number.Value = this.Number;
             cmd.Parameters.Add(number);
-
-            MySqlParameter seats = new MySqlParameter();
-            seats.ParameterName = "@seats";
-            seats.Value = this.Seats;
-            cmd.Parameters.Add(seats);
 
             cmd.ExecuteNonQuery();
             Id = (int)cmd.LastInsertedId;
@@ -189,8 +175,8 @@ namespace POS.Models
             {
                 int tableId = rdr.GetInt32(0);
                 int tableNum = rdr.GetInt32(1);
-                int tableSeats = rdr.GetInt32(2);
-                Table newTable = new Table(tableNum, tableSeats, tableId);
+
+                Table newTable = new Table(tableNum, tableId);
                 allTables.Add(newTable);
             }
 
@@ -222,7 +208,7 @@ namespace POS.Models
             while (rdr.Read())
             {
                 int ticketId = rdr.GetInt32(0);
-                int seatNum = rdr.GetInt32(1);
+                int ticketNum = rdr.GetInt32(1);
                 int foodId = rdr.GetInt32(2);
                 int drinkId = rdr.GetInt32(3);
                 int userId = rdr.GetInt32(4);
@@ -233,7 +219,12 @@ namespace POS.Models
                 User newUser = User.Find(userId);
                 Table newTable = Table.Find(tableId);
 
-                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
+                Ticket newTicket = new Ticket(ticketNum);
+                newTicket.Food_Id = newFood;
+                newTicket.Drink_Id = newDrink;
+                newTicket.User_Id = newUser;
+                newTicket.Table_Id = newTable;
+
                 tickets.Add(newTicket);
             }
 
@@ -246,6 +237,7 @@ namespace POS.Models
             return tickets;
         }
 
+        /*
         public int GetRemainingSeats()
         {
             MySqlConnection conn = DB.Connection();
@@ -275,6 +267,7 @@ namespace POS.Models
 
             return remainingSeats;
         }
+        */
 
         public double TableValue()
         {

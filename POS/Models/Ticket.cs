@@ -9,16 +9,16 @@ namespace POS.Models
 {
     public class Ticket
     {
-        public int SeatNumber { get; set; }
+        public int TicketNumber { get; set; }
         public Food Food_Id { get; set; }
         public Drink Drink_Id { get; set; }
         public User User_Id { get; set; }
         public Table Table_Id { get; set; }
         public int Id { get; set; }
 
-        public Ticket(int seatNumber, int id = 0)
+        public Ticket(int ticketNumber, int id = 0)
         {
-            SeatNumber = seatNumber;
+            TicketNumber = ticketNumber;
             Id = id;
         }
 
@@ -31,8 +31,8 @@ namespace POS.Models
             else
             {
                 Ticket newTicket = (Ticket)otherTicket;
-                bool seatEquality = (this.SeatNumber == newTicket.SeatNumber);
-                return (seatEquality);
+                bool ticketEquality = (this.TicketNumber == newTicket.TicketNumber);
+                return (ticketEquality);
             }
         }
 
@@ -185,17 +185,12 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM tickets WHERE id = @searchId; UPDATE tables SET seats = seats + 1 WHERE tables.id = @Table;";
+            cmd.CommandText = @"DELETE FROM tickets WHERE id = @searchId;";
 
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
             searchId.Value = existingTicket.Id;
             cmd.Parameters.Add(searchId);
-
-            MySqlParameter tableId = new MySqlParameter();
-            tableId.ParameterName = "@Table";
-            tableId.Value = existingTicket.Table_Id.Id;
-            cmd.Parameters.Add(tableId);
 
             cmd.ExecuteNonQuery();
 
@@ -206,13 +201,13 @@ namespace POS.Models
             }
         }
 
-        public void Edit(int newSeat, int newFoodId, int newDrinkId, int newUserId, int newTableId)
+        public void Edit(int newTicket, int newFoodId, int newDrinkId, int newUserId, int newTableId)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE tickets SET seat_number = @newSeat WHERE id = @searchId;
+            cmd.CommandText = @"UPDATE tickets SET ticket_number = @newTicket WHERE id = @searchId;
                                 UPDATE tickets SET food_id = @newFood WHERE id = @searchId;
                                 UPDATE tickets SET drink_id = @newDrink WHERE id = @searchId;
                                 UPDATE tickets SET user_id = @newUser WHERE id = @searchId;
@@ -223,10 +218,10 @@ namespace POS.Models
             searchId.Value = Id;
             cmd.Parameters.Add(searchId);
 
-            MySqlParameter seat = new MySqlParameter();
-            seat.ParameterName = "@newSeat";
-            seat.Value = newSeat;
-            cmd.Parameters.Add(seat);
+            MySqlParameter ticket = new MySqlParameter();
+            ticket.ParameterName = "@newTicket";
+            ticket.Value = newTicket;
+            cmd.Parameters.Add(ticket);
 
             MySqlParameter food = new MySqlParameter();
             food.ParameterName = "@newFood";
@@ -249,7 +244,7 @@ namespace POS.Models
             cmd.Parameters.Add(table);
 
             cmd.ExecuteNonQuery();
-            this.SeatNumber = newSeat;
+            this.TicketNumber = newTicket;
             this.Food_Id = Food.Find(newFoodId);
             this.Drink_Id = Drink.Find(newDrinkId);
             this.User_Id = User.Find(newUserId);
@@ -261,7 +256,7 @@ namespace POS.Models
                 conn.Dispose();
             }
         }
-
+            
         public static Ticket Find(int id)
         {
             MySqlConnection conn = DB.Connection();
@@ -278,7 +273,7 @@ namespace POS.Models
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
             int ticketId = 0;
-            int seatNum = 0;
+            int ticketNum = 0;
             int foodId = 0;
             int drinkId = 0;
             int userId = 0;
@@ -293,7 +288,7 @@ namespace POS.Models
             while (rdr.Read())
             {
                 ticketId = rdr.GetInt32(0);
-                seatNum = rdr.GetInt32(1);
+                ticketNum = rdr.GetInt32(1);
                 foodId = rdr.GetInt32(2);
                 drinkId = rdr.GetInt32(3);
                 userId = rdr.GetInt32(4);
@@ -305,7 +300,11 @@ namespace POS.Models
                 newTable = Table.Find(tableId);
             }
 
-            Ticket foundTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
+            Ticket foundTicket = new Ticket(ticketNum);
+            foundTicket.Food_Id = newFood;
+            foundTicket.Drink_Id = newDrink;
+            foundTicket.User_Id = newUser;
+            foundTicket.Table_Id = newTable;
 
             conn.Close();
             if (conn != null)
@@ -322,32 +321,12 @@ namespace POS.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (seat_number, food_id, drink_id, user_id, table_id) VALUES (@Seat, @Food, @Drink, @User, @Table); UPDATE tables SET seats = seats - 1 WHERE tables.id = @Table;";
+            cmd.CommandText = @"INSERT INTO tickets (ticket_number) VALUES (@TicketNumber);"; 
 
-            MySqlParameter seat = new MySqlParameter();
-            seat.ParameterName = "@Seat";
-            seat.Value = this.SeatNumber;
-            cmd.Parameters.Add(seat);
-
-            MySqlParameter food = new MySqlParameter();
-            food.ParameterName = "@Food";
-            food.Value = this.Food_Id.Id;
-            cmd.Parameters.Add(food);
-
-            MySqlParameter drink = new MySqlParameter();
-            drink.ParameterName = "@Drink";
-            drink.Value = this.Drink_Id.Id;
-            cmd.Parameters.Add(drink);
-
-            MySqlParameter user = new MySqlParameter();
-            user.ParameterName = "@User";
-            user.Value = this.User_Id.Id;
-            cmd.Parameters.Add(user);
-
-            MySqlParameter table = new MySqlParameter();
-            table.ParameterName = "@Table";
-            table.Value = this.Table_Id.Id;
-            cmd.Parameters.Add(table);
+            MySqlParameter ticket_number = new MySqlParameter();
+            ticket_number.ParameterName = "@TicketNumber";
+            ticket_number.Value = this.TicketNumber;
+            cmd.Parameters.Add(ticket_number);
 
             cmd.ExecuteNonQuery();
             Id = (int)cmd.LastInsertedId;
@@ -372,7 +351,7 @@ namespace POS.Models
             while (rdr.Read())
             {
                 int ticketId = rdr.GetInt32(0);
-                int seatNum = rdr.GetInt32(1);
+                int ticketNum = rdr.GetInt32(1);
                 int foodId = rdr.GetInt32(2);
                 int drinkId = rdr.GetInt32(3);
                 int userId = rdr.GetInt32(4);
@@ -383,9 +362,14 @@ namespace POS.Models
                 User newUser = User.Find(userId);
                 Table newTable = Table.Find(tableId);
 
-                Ticket newTicket = new Ticket(seatNum, newFood, newDrink, newUser, newTable, ticketId);
+                Ticket newTicket = new Ticket(ticketNum);
+                newTicket.Food_Id = newFood;
+                newTicket.Drink_Id = newDrink;
+                newTicket.User_Id = newUser;
+                newTicket.Table_Id = newTable;
 
                 allTickets.Add(newTicket);
+
             }
 
             conn.Close();
