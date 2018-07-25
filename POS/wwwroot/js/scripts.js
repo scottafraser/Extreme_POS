@@ -21,7 +21,7 @@ var testAjax = function() {
     $('.menu button').click(function () {
       $.ajax({
         type: 'GET',
-        url: '/Mockup/TestPull',
+        url: '/foods',
         success: function (result) {
           $('#food-display').html(result);
         }
@@ -29,12 +29,42 @@ var testAjax = function() {
     });
 }
 
-var menu
+var testAjax1 = function() {
+    $('.menu button').click(function () {
+      $.ajax({
+        type: 'GET',
+        url: '/drinks',
+        success: function (result) {
+          $('#drinks-display').html(result);
+        }
+      });
+    });
+}
+
+var testAjax2 = function() {
+    $('.menu button').click(function () {
+      $.ajax({
+        type: 'GET',
+        url: '/table/map',
+        success: function (result) {
+          $('#tables-display').html(result);
+        }
+      });
+    });
+}
+
+
 
 $(function() {
     menuNav();
     menuDisplay();
 
 
-
+    $.ajax({
+        type: 'GET',
+        url: '/tickets',
+        success: function (result) {
+          $('.ticket-display').html(result);
+        }
+    });
 });
