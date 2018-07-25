@@ -4,6 +4,8 @@ var menuDisplay = function() {
         $(".display").hide();
         $("#" + target + "-display").show();
     });
+
+    $("#tables").click();
 }
 
 var menuNav = function() {
@@ -51,6 +53,14 @@ var testAjax2 = function() {
         }
       });
     });
+
+    $.ajax({
+        type: 'GET',
+        url: '/tickets',
+        success: function (result) {
+          $('.ticket-display').html(result);
+        }
+    });
 }
 
 
@@ -60,11 +70,5 @@ $(function() {
     menuDisplay();
 
 
-    $.ajax({
-        type: 'GET',
-        url: '/tickets',
-        success: function (result) {
-          $('.ticket-display').html(result);
-        }
-    });
+
 });
