@@ -12,6 +12,7 @@ namespace POS.Controllers
 {
     public class MockupController : Controller
     {
+
         [HttpGet("/home")]
         public IActionResult Index(int id)
         {
@@ -19,7 +20,7 @@ namespace POS.Controllers
             OrderInfo newOrder = new OrderInfo();
             newOrder.FoundUser = existingUser;
 
-            return View(newOrder);
+            return View("Index", newOrder);
         }
 
 

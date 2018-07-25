@@ -33,7 +33,7 @@ namespace POS.Controllers
             newTicket.AddUser(Models.User.Find(user_id));
             newTicket.AddTable(Table.Find(table_id));                    
 
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Mockup", new { id = user_id });
         }
 
         [HttpGet("/ticket/{id}/update")]
