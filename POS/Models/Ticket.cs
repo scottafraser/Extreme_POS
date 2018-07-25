@@ -98,10 +98,13 @@ namespace POS.Models
             user_id.Value = newUser.Id;
             cmd.Parameters.Add(user_id);
 
+
+
             MySqlParameter searchId = new MySqlParameter();
             searchId.ParameterName = "@searchId";
             searchId.Value = Id;
             cmd.Parameters.Add(searchId);
+
 
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -265,75 +268,17 @@ namespace POS.Models
             }
         }
             
-        public static Ticket Find(int id)
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM tickets WHERE id = @thisId;";
-
-            MySqlParameter thisId = new MySqlParameter();
-            thisId.ParameterName = "@thisId";
-            thisId.Value = id;
-            cmd.Parameters.Add(thisId);
-
-            var rdr = cmd.ExecuteReader() as MySqlDataReader;
-
-            int ticketId = 0;
-            int ticketNum = 0;
-            int foodId = 0;
-            int drinkId = 0;
-            int userId = 0;
-            int tableId = 0;
-
-            Food newFood = null;
-            Drink newDrink = null;
-            User newUser = null;
-            Table newTable = null;
-
-
-            while (rdr.Read())
-            {
-                ticketId = rdr.GetInt32(0);
-                ticketNum = rdr.GetInt32(1);
-                foodId = rdr.GetInt32(2);
-                drinkId = rdr.GetInt32(3);
-                userId = rdr.GetInt32(4);
-                tableId = rdr.GetInt32(5);
-
-                newFood = Food.Find(foodId);
-                newDrink = Drink.Find(drinkId);
-                newUser = User.Find(userId);
-                newTable = Table.Find(tableId);
-            }
-
-            Ticket foundTicket = new Ticket(ticketNum);
-            foundTicket.Food_Id = newFood;
-            foundTicket.Drink_Id = newDrink;
-            foundTicket.User_Id = newUser;
-            foundTicket.Table_Id = newTable;
-
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-
-            return foundTicket;
-        }
-
-        //public static Ticket FindTicketNumber(int ticketnumber)
+        //public static Ticket Find(int id)
         //{
         //    MySqlConnection conn = DB.Connection();
         //    conn.Open();
 
         //    var cmd = conn.CreateCommand() as MySqlCommand;
-        //    cmd.CommandText = @"SELECT * FROM tickets WHERE ticket_number = @thisId;";
+        //    cmd.CommandText = @"SELECT * FROM tickets WHERE id = @thisId;";
 
         //    MySqlParameter thisId = new MySqlParameter();
         //    thisId.ParameterName = "@thisId";
-        //    thisId.Value = ticketnumber;
+        //    thisId.Value = id;
         //    cmd.Parameters.Add(thisId);
 
         //    var rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -342,9 +287,8 @@ namespace POS.Models
         //    int ticketNum = 0;
         //    int userId = 0;
         //    int tableId = 0;
-        //    string active = "";
 
-        //    User newUser = null;
+        //    Food newFood = null;
         //    Table newTable = null;
 
 
@@ -352,9 +296,9 @@ namespace POS.Models
         //    {
         //        ticketId = rdr.GetInt32(0);
         //        ticketNum = rdr.GetInt32(1);
-        //        userId = rdr.GetInt32(2);
-        //        tableId = rdr.GetInt32(3);
-        //        active = rdr.GetString(4);
+        //        userId = rdr.GetInt32(3);
+        //        tableId = rdr.GetInt32(4);
+        //        active = rdr.GetString(5);
 
 
         //        newUser = User.Find(userId);
@@ -375,6 +319,7 @@ namespace POS.Models
 
         //    return foundTicket;
         //}
+
 
         public void Save()
         {

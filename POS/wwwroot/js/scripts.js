@@ -1,3 +1,6 @@
+
+
+
 var menuDisplay = function() {
     $(".menu button").click(function() {
         var target = $(this).attr("id");
@@ -74,6 +77,17 @@ $(function() {
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
         var foodId = $(this).children().first().siblings().html();
+        var items = [];
+        var total = 0;
+    
+        $('.price').each(function(i, obj) {
+            items.push(this)
+            for (var i = 0; i < items.length; i++) {
+                total += items[i] << 0;
+            }
+            console.log(items)
+        });
+
         foodAdd(foodName, foodId);
     });
 
@@ -82,14 +96,25 @@ $(function() {
         drinkAdd(drinkId);
     });
 
+      $(document).on("click", ".drinks-item", function () {
+        var drinkId = $(this).children().first().siblings().html();
+        drinkAdd(drinkId);
+    });
+
+
+
+
+
+
+
     $(".wide-table").click(function() {
-        var tableId = $(this).children().children().text());
+        var tableId = $(this).children().children().text();
+        var url = $(this).children().first().attr('href');
         $.ajax({
-        type: 'get',
-        data: { id: tableId},
-        url: '/tickets',
+        type: 'post',
+        url: url,
         success: function (result) {
-          $('.ticket-display').html(result);
+          $('.ticket-number').html(result);
         }
       });
     });

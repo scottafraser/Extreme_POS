@@ -149,3 +149,8 @@ body {
 table * {
     border: none !important  
 }
+
+.ticket-header{
+    text-align:center;
+    padding: 10px;
+}

@@ -20,7 +20,8 @@
     
 @foreach (var food in Model)
 {
-  <li class="food-item"><a href="/foods/@food.Id/details">@food.Name</a></li>
+  <li class="food-item"><a href="/foods/@food_id/@user_id/order">@food.Name</a></li>
 }
 
 </ul>
+

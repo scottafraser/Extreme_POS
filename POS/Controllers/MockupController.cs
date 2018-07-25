@@ -54,5 +54,27 @@ namespace POS.Controllers
 
             return PartialView("DrinksAdd", newOrder.FoundDrink);
         }
+
+
+        //[HttpGet("/tickets)]
+        //public IActionResult Ticket(id)
+        //{
+        //    OrderInfo newOrder = new OrderInfo();
+
+            
+        //    return PartialView(newOrder);
+        //}
+
+        [HttpPost("/tickets/{table_id}/{user_id}/new")]
+        public ActionResult CreateTicket(int table_id, int user_id)
+        {
+            Ticket newTicket = new Ticket(Ticket.GenerateTicketNumber());
+            newTicket.Save();
+            newTicket.AddUser(Models.User.Find(user_id));
+            newTicket.AddTable(Table.Find(table_id));
+
+            return PartialView("Ticket", newTicket);
+        }
+
     }
 }

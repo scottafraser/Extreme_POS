@@ -40,7 +40,7 @@ namespace POS.Controllers
             return View(foodDetails);
         }
 
-        [HttpPost("/foods/{id}/order")]
+        [HttpPost("/foods/{food_id}/{user_id}/order")]
         public ActionResult Order(int id, int serverid, int tableid)
         {
             Food foodDetails = Food.Find(id);
