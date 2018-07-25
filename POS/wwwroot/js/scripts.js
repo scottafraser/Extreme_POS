@@ -53,12 +53,23 @@ var testAjax2 = function() {
     });
 }
 
-var foodFlood = function() {
+var foodFlood = function() { // populates the food tab buttons
       $.ajax({
         type: 'GET',
-        url: '/food',
+        url: '/food-get',
         success: function (result) {
           $('#food-display').html(result);
+        }
+      });
+}
+
+var foodAdd = function(name, id) { // hopefully tosses said buttons into ticket
+    $.ajax({
+        type: 'post',
+        data: { name: name, id: id },
+        url: '/food-add',
+        success: function (result) {
+          $('.food-orders').html(result);
         }
       });
 }
@@ -68,5 +79,10 @@ $(function() {
     menuDisplay();
     foodFlood();
 
+    $(document).on("click", ".food-item", function () {
+        var foodName = $(this).children().first().html();
+        var foodId = $(this).children().first().siblings().html());
+        foodAdd(foodName, foodId);
 
+    });
 });

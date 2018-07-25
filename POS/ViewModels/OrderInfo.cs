@@ -19,6 +19,7 @@ namespace POS.ViewModels
 
         public List<Food> Entrees { get; set; }
         public List<Food> Appetizers { get; set; }
+        public static List<Food> OrderedFood { get; set; }
 
         public Food FoundFood { get;  set; }
         public Drink FoundDrink { get; set; }
@@ -36,7 +37,8 @@ namespace POS.ViewModels
             AllTickets = Ticket.GetAll();
 
             Entrees = new List<Food>{};
-            Appetizers  = new List<Food> {};
+            Appetizers  = new List<Food>{};
+            OrderedFood = new List<Food>{};
 
             foreach(var food in AllFood)
             {

@@ -18,11 +18,17 @@ namespace POS.Controllers
             return View();
         }
 
-        [HttpGet("/food")]
+        [HttpGet("/food-get")]
         public IActionResult FoodFlood()
         {
             OrderInfo newOrder = new OrderInfo();
             return PartialView("Food", newOrder );
+        }
+
+        [HttpPost("/food-add")]
+        public IActionResult FoodAdd(string name, int id)
+        {
+            return PartialView("Food", newOrder);
         }
 
 
