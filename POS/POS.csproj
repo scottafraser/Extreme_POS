@@ -20,6 +20,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Mockup\" />
     <Folder Include="Views\Drinks\" />
@@ -28,6 +29,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Table\" />
 
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
   <ItemGroup>
