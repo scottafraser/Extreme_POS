@@ -143,3 +143,5 @@ body {
 
     .ticket-grid>div{ outline: 1px solid gray; background: white; width:80%;}
     .mar {padding:20px;}
+
+.food-id { display:none };

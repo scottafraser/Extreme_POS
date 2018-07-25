@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using POS.Models;
+using POS.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,12 +18,13 @@ namespace POS.Controllers
             return View();
         }
 
-
-
-        public IActionResult TestPull()
+        [HttpGet("/food")]
+        public IActionResult FoodFlood()
         {
-            return View(Food.GetAll());
+            OrderInfo newOrder = new OrderInfo();
+            return PartialView("Food", newOrder );
         }
+
 
     }
 }

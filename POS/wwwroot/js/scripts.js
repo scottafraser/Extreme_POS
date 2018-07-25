@@ -19,17 +19,7 @@ var menuNav = function() {
     });
 }
 
-var testAjax = function() {
-    $('.menu button').click(function () {
-      $.ajax({
-        type: 'GET',
-        url: '/foods',
-        success: function (result) {
-          $('#food-display').html(result);
-        }
-      });
-    });
-}
+
 
 var testAjax1 = function() {
     $('.menu button').click(function () {
@@ -63,12 +53,20 @@ var testAjax2 = function() {
     });
 }
 
-
+var foodFlood = function() {
+      $.ajax({
+        type: 'GET',
+        url: '/food',
+        success: function (result) {
+          $('#food-display').html(result);
+        }
+      });
+}
 
 $(function() {
     menuNav();
     menuDisplay();
-
+    foodFlood();
 
 
 });

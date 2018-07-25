@@ -17,6 +17,9 @@ namespace POS.ViewModels
         public List<User> AllUsers { get; set; }
         public List<Table> AllTables { get; set; }
 
+        public List<Food> Entrees { get; set; }
+        public List<Food> Appetizers { get; set; }
+
         public Food FoundFood { get;  set; }
         public Drink FoundDrink { get; set; }
         public User FoundUser { get; set; }
@@ -31,7 +34,21 @@ namespace POS.ViewModels
             AllUsers = User.GetAll();
             AllTables = Table.GetAll();
             AllTickets = Ticket.GetAll();
-         
+
+            Entrees = new List<Food>{};
+            Appetizers  = new List<Food> {};
+
+            foreach(var food in AllFood)
+            {
+                if (food.Category == "entree")
+                {
+                    Entrees.Add(food);
+                }
+                else if (food.Category == "app")
+                {
+                    Appetizers.Add(food);
+                }
+            }
         }
 
 
