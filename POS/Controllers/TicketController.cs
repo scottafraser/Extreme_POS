@@ -22,7 +22,7 @@ namespace POS.Controllers
             //Ticket thisTicket = new Ticket();
             //List<Food> allFood = allFood.
 
-            return View(newOrder);
+            return PartialView(newOrder);
         }
 
         [HttpPost("/tickets{table_id}/new")]
