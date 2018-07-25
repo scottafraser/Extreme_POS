@@ -69,7 +69,7 @@ var foodAdd = function(name, id) { // hopefully tosses said buttons into ticket
         data: { name: name, id: id },
         url: '/food-add',
         success: function (result) {
-          $('.food-orders').html(result);
+          $('.food-orders tbody').append(result);
         }
       });
 }
@@ -81,7 +81,7 @@ $(function() {
 
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
-        var foodId = $(this).children().first().siblings().html());
+        var foodId = $(this).children().first().siblings().html();
         foodAdd(foodName, foodId);
 
     });

@@ -28,7 +28,10 @@ namespace POS.Controllers
         [HttpPost("/food-add")]
         public IActionResult FoodAdd(string name, int id)
         {
-            return PartialView("Food", newOrder);
+            OrderInfo newOrder = new OrderInfo();
+            newOrder.FindFood(id);
+
+            return PartialView("FoodAdd", newOrder.FoundFood);
         }
 
 
