@@ -1,0 +1,19 @@
+﻿
+
+<div class="category-grid">
+    <div class="food-grid entree">        
+        <div class="category"><span class="label">Entrées</span></div>
+        @for(int i = 0; i < Model.Entrees.Count; i++)
+        {
+        <div class="food-item food-" + @i><span class="label food-name">@Model.Entrees[i].Name</span><span class="food-id">@Model.Entrees[i].Id</span></div>
+        }
+    </div>
+    <div class="food-grid appetizer">
+        <div class="category"><span class="label">Appetizers</span></div>
+         @for(int i = 0; i < Model.Appetizers.Count; i++)
+        {
+        <div class="food-item food-" + @i><span class="label">@Model.Appetizers[i].Name</span><span class="food-id">@Model.Appetizers[i].Id</span></div>
+        }
+    </div>
+
+</div>

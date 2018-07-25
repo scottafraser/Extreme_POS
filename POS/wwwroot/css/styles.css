@@ -98,7 +98,7 @@ body {
     .category { grid-area: category; } .food-1 { grid-area: food-1; } .food-2 { grid-area: food-2; } .food-3 { grid-area: food-3; } .food-4 { grid-area: food-4; } .food-5 { grid-area: food-5; } .food-6 { grid-area: food-6; }
     .food-item, .category { outline: 1px solid gray; }
     .label { position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-.ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray;}
+.ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray; overflow:auto}
 .footer { grid-area: footer; background-color:lightblue; border-top: 1px solid gray;}
 
 .btn-link, .btn-link:hover, .btn-link:focus { text-decoration: none; color: black; }
@@ -143,3 +143,9 @@ body {
 
     .ticket-grid>div{ outline: 1px solid gray; background: white; width:80%;}
     .mar {padding:20px;}
+
+.food-id, .drink-id { display:none };
+
+table * {
+    border: none !important  
+}

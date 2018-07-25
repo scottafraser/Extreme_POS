@@ -37,6 +37,9 @@
     <Content Remove="Views\Home\About.cshtml" />
     <Content Remove="Views\Home\Contact.cshtml" />
     <Content Remove="Views\Home\Index.cshtml" />
+    <Content Remove="Views\_ViewImports.cshtml" />
+    <Content Remove="Views\_ViewStart.cshtml" />
+    <Content Remove="Views\Mockup\TestPull.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Mods.cs" />

@@ -1,0 +1,24 @@
+﻿
+<div class="drinks-cat-grid">
+    <div class="beverages drinks-drinks-grid">
+        <div class="drink-type"><span class="label">Beverages</span></div>
+        @for(int i = 0; i < Model.Beverages.Count; i++)
+        {
+        <div class="drinks-item drink-" + @i><span class="label">@Model.Beverages[i].Name</span><span class="drink-id">@Model.Beverages[i].Id</span></div>
+        }
+    </div>
+    <div class="beers drinks-drinks-grid">
+        <div class="drink-type"><span class="label">Beers</span></div>
+        @for(int i = 0; i < Model.Beers.Count; i++)
+        {
+        <div class="drinks-item drink-" + @i><span class="label">@Model.Beers[i].Name</span><span class="drink-id">@Model.Beers[i].Id</span></div>
+        }
+    </div>
+    <div class="wines drinks-drinks-grid">
+        <div class="drink-type"><span class="label">Wines</span></div>
+        @for(int i = 0; i < Model.Wines.Count; i++)
+        {
+        <div class="drinks-item drink-" + @i><span class="label">@Model.Wines[i].Name</span><span class="drink-id">@Model.Wines[i].Id</span></div>
+        }
+    </div>
+</div>

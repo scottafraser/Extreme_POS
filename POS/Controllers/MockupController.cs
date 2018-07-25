@@ -23,12 +23,36 @@ namespace POS.Controllers
             return View("Index", newOrder);
         }
 
-
-
-        public IActionResult TestPull()
+        [HttpGet("/food-get")]
+        public IActionResult FoodFlood()
         {
-            return View(Food.GetAll());
+            OrderInfo newOrder = new OrderInfo();
+            return PartialView("Food", newOrder );
         }
 
+        [HttpPost("/food-add")]
+        public IActionResult FoodAdd(string name, int id)
+        {
+            OrderInfo newOrder = new OrderInfo();
+            newOrder.FindFood(id);
+
+            return PartialView("FoodAdd", newOrder.FoundFood);
+        }
+
+        [HttpGet("/drinks-get")]
+        public IActionResult DrinkFlood()
+        {
+            OrderInfo newOrder = new OrderInfo();
+            return PartialView("Drinks", newOrder);
+        }
+
+        [HttpPost("/drinks-add")]
+        public IActionResult DrinkAdd(int id)
+        {
+            OrderInfo newOrder = new OrderInfo();
+            newOrder.FindDrink(id);
+
+            return PartialView("DrinksAdd", newOrder.FoundDrink);
+        }
     }
 }
