@@ -144,8 +144,7 @@ body {
     .ticket-grid>div{ outline: 1px solid gray; background: white; width:80%;}
     .mar {padding:20px;}
 
-.food-id { display:none };
-.hidden-data-exchange { display: none }
+.food-id, .drink-id { display:none };
 
 table * {
     border: none !important  

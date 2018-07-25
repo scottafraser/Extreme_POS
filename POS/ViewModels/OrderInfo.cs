@@ -21,6 +21,10 @@ namespace POS.ViewModels
         public List<Food> Appetizers { get; set; }
         public static List<Food> OrderedFood { get; set; }
 
+        public List<Drink> Beverages { get; set; }
+        public List<Drink> Beers { get; set; }
+        public List<Drink> Wines { get; set; }
+
         public Food FoundFood { get;  set; }
         public Drink FoundDrink { get; set; }
         public User FoundUser { get; set; }
@@ -38,7 +42,7 @@ namespace POS.ViewModels
 
             Entrees = new List<Food>{};
             Appetizers  = new List<Food>{};
-            OrderedFood = new List<Food>{};
+            OrderedFood = new List<Food>{}; // unused at the moment
 
             foreach(var food in AllFood)
             {
@@ -49,6 +53,26 @@ namespace POS.ViewModels
                 else if (food.Category == "app")
                 {
                     Appetizers.Add(food);
+                }
+            }
+
+            Beverages = new List<Drink> { };
+            Beers = new List<Drink> { };
+            Wines = new List<Drink> { };
+
+            foreach (var drink in AllDrink)
+            {
+                if (drink.Category == "beer")
+                {
+                    Beers.Add(drink);
+                }
+                else if (drink.Category == "wine")
+                {
+                    Wines.Add(drink);
+                }
+                else 
+                {
+                    Beverages.Add(drink);
                 }
             }
         }

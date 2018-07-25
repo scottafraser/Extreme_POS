@@ -74,15 +74,44 @@ var foodAdd = function(name, id) { // hopefully tosses said buttons into ticket
       });
 }
 
+var drinksFlood = function() {
+      $.ajax({
+        type: 'GET',
+        url: '/drinks-get',
+        success: function (result) {
+          $('#drinks-display').html(result);
+        }
+      });
+}
+
+var drinkAdd = function(id) {
+    $.ajax({
+        type: 'post',
+        data: { id: id },
+        url: '/drinks-add',
+        success: function (result) {
+          $('.drink-orders tbody').append(result);
+        }
+      });
+}
+
+
+
 $(function() {
     menuNav();
     menuDisplay();
     foodFlood();
+    drinksFlood();
 
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
         var foodId = $(this).children().first().siblings().html();
         foodAdd(foodName, foodId);
-
     });
+
+    $(document).on("click", ".drinks-item", function () {
+        var drinkId = $(this).children().first().siblings().html();
+        drinkAdd(drinkId);
+    });
+
 });
