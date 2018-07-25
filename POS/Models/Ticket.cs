@@ -323,63 +323,58 @@ namespace POS.Models
             return foundTicket;
         }
 
-        public static Ticket FindTicketNumber(int ticketnumber)
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
+        //public static Ticket FindTicketNumber(int ticketnumber)
+        //{
+        //    MySqlConnection conn = DB.Connection();
+        //    conn.Open();
 
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM tickets WHERE ticket_number = @thisId;";
+        //    var cmd = conn.CreateCommand() as MySqlCommand;
+        //    cmd.CommandText = @"SELECT * FROM tickets WHERE ticket_number = @thisId;";
 
-            MySqlParameter thisId = new MySqlParameter();
-            thisId.ParameterName = "@thisId";
-            thisId.Value = ticketnumber;
-            cmd.Parameters.Add(thisId);
+        //    MySqlParameter thisId = new MySqlParameter();
+        //    thisId.ParameterName = "@thisId";
+        //    thisId.Value = ticketnumber;
+        //    cmd.Parameters.Add(thisId);
 
-            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        //    var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-            int ticketId = 0;
-            int ticketNum = 0;
-            int foodId = 0;
-            int drinkId = 0;
-            int userId = 0;
-            int tableId = 0;
+        //    int ticketId = 0;
+        //    int ticketNum = 0;
+        //    int userId = 0;
+        //    int tableId = 0;
+        //    string active = "";
 
-            Food newFood = null;
-            Drink newDrink = null;
-            User newUser = null;
-            Table newTable = null;
+        //    User newUser = null;
+        //    Table newTable = null;
 
 
-            while (rdr.Read())
-            {
-                ticketId = rdr.GetInt32(0);
-                ticketNum = rdr.GetInt32(1);
-                foodId = rdr.GetInt32(2);
-                drinkId = rdr.GetInt32(3);
-                userId = rdr.GetInt32(4);
-                tableId = rdr.GetInt32(5);
+        //    while (rdr.Read())
+        //    {
+        //        ticketId = rdr.GetInt32(0);
+        //        ticketNum = rdr.GetInt32(1);
+        //        userId = rdr.GetInt32(2);
+        //        tableId = rdr.GetInt32(3);
+        //        active = rdr.GetString(4);
 
-                newFood = Food.Find(foodId);
-                newDrink = Drink.Find(drinkId);
-                newUser = User.Find(userId);
-                newTable = Table.Find(tableId);
-            }
 
-            Ticket foundTicket = new Ticket(ticketNum);
-            foundTicket.Food_Id = newFood;
-            foundTicket.Drink_Id = newDrink;
-            foundTicket.User_Id = newUser;
-            foundTicket.Table_Id = newTable;
+        //        newUser = User.Find(userId);
+        //        newTable = Table.Find(tableId);
+        //    }
 
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
+        //    Ticket foundTicket = new Ticket(ticketNum);
+        //    foundTicket.Food_Id = newFood;
+        //    foundTicket.Drink_Id = newDrink;
+        //    foundTicket.User_Id = newUser;
+        //    foundTicket.Table_Id = newTable;
 
-            return foundTicket;
-        }
+        //    conn.Close();
+        //    if (conn != null)
+        //    {
+        //        conn.Dispose();
+        //    }
+
+        //    return foundTicket;
+        //}
 
         public void Save()
         {
@@ -418,21 +413,12 @@ namespace POS.Models
             {
                 int ticketId = rdr.GetInt32(0);
                 int ticketNum = rdr.GetInt32(1);
-                int foodId = rdr.GetInt32(2);
-                int drinkId = rdr.GetInt32(3);
-                int userId = rdr.GetInt32(4);
-                int tableId = rdr.GetInt32(5);
+                int userId = rdr.GetInt32(2);
+                int tableId = rdr.GetInt32(3);
+                string active = rdr.GetString(4);
 
-                Food newFood = Food.Find(foodId);
-                Drink newDrink = Drink.Find(drinkId);
-                User newUser = User.Find(userId);
-                Table newTable = Table.Find(tableId);
+                Ticket newTicket = new Ticket(ticketNum, ticketId);
 
-                Ticket newTicket = new Ticket(ticketNum);
-                newTicket.Food_Id = newFood;
-                newTicket.Drink_Id = newDrink;
-                newTicket.User_Id = newUser;
-                newTicket.Table_Id = newTable;
 
                 allTickets.Add(newTicket);
 

@@ -133,12 +133,10 @@ namespace POS.ViewModels
             FoundTable = Table.Find(id);
         }
 
-        public void FindTicketNumber(int tixNum)
-        {
-            FoundTicket = Ticket.FindTicketNumber(tixNum);
-        }
-
-
+        SELECT food.* FROM tickets
+                JOIN orders ON(tickets.id = orders.ticket_id)
+                JOIN food ON(orders.food_id = food.id)
+                WHERE tickets.id = 1
   
     }
 }

@@ -21,38 +21,6 @@ var menuNav = function() {
 
 
 
-var testAjax1 = function() {
-    $('.menu button').click(function () {
-      $.ajax({
-        type: 'GET',
-        url: '/drinks',
-        success: function (result) {
-          $('#drinks-display').html(result);
-        }
-      });
-    });
-}
-
-var testAjax2 = function() {
-    $('.menu button').click(function () {
-      $.ajax({
-        type: 'GET',
-        url: '/table/map',
-        success: function (result) {
-          $('#tables-display').html(result);
-        }
-      });
-    });
-
-    $.ajax({
-        type: 'GET',
-        url: '/tickets',
-        success: function (result) {
-          $('.ticket-display').html(result);
-        }
-    });
-}
-
 var foodFlood = function() { // populates the food tab buttons
       $.ajax({
         type: 'GET',
@@ -62,6 +30,8 @@ var foodFlood = function() { // populates the food tab buttons
         }
       });
 }
+
+
 
 var foodAdd = function(name, id) { // hopefully tosses said buttons into ticket
     $.ajax({
@@ -95,8 +65,6 @@ var drinkAdd = function(id) {
       });
 }
 
-
-
 $(function() {
     menuNav();
     menuDisplay();
@@ -112,6 +80,18 @@ $(function() {
     $(document).on("click", ".drinks-item", function () {
         var drinkId = $(this).children().first().siblings().html();
         drinkAdd(drinkId);
+    });
+
+    $(".wide-table").click(function() {
+        var tableId = $(this).children().children().text());
+        $.ajax({
+        type: 'get',
+        data: { id: tableId},
+        url: '/tickets',
+        success: function (result) {
+          $('.ticket-display').html(result);
+        }
+      });
     });
 
 });
