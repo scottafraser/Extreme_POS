@@ -28,7 +28,7 @@ body {
     .tabs-field { background-color: white; border-bottom: 1px solid gray; border-left: 1px solid gray;}
     .add-tab {position: absolute;right: -1px;bottom: -1px;border: 1px solid black;border-bottom: 2px solid lightblue;z-index: 1;height: 50%; background-color:lightblue;}
 .ui-display { grid-area: ui-display; }
-    #tables-display { background: lightblue; background-repeat: no-repeat; background-size: cover;}
+    #tables-display, #food-display, #drinks-display { background: lightblue; background-repeat: no-repeat; background-size: cover;}
     .display { height: 100%; display: none;}
     .restaurant-grid {
         height: 100%;
@@ -79,13 +79,40 @@ body {
         grid-template-rows: 1fr 1fr;
         grid-gap: 10px;
         padding: 10px;
-        grid-template-areas: "entree appetizer" "maincourse dessert";
+        grid-template-areas: "entree appetizer" "main-course dessert";
     }
-    .entree { grid-area: entree; } .appetizer { grid-area: appetizer; } .maincourse { grid-area: maincourse; } .dessert { grid-area: dessert; }
+    .entree { grid-area: entree; } .appetizer { grid-area: appetizer; } .main-course { grid-area: main-course; } .dessert { grid-area: dessert; }
 
-        .label { position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+    .food-grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+        padding: 10px;
+        grid-template-areas: "category category" "food-1 food-2" "food-3 food-4" "food-5 food-6"
+    }
+    .food-grid div {
+        background-color: white;
+    }
+    .category { grid-area: category; } .food-1 { grid-area: food-1; } .food-2 { grid-area: food-2; } .food-3 { grid-area: food-3; } .food-4 { grid-area: food-4; } .food-5 { grid-area: food-5; } .food-6 { grid-area: food-6; }
+    .food-item, .category { outline: 1px solid gray; }
+    .label { position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 .ticket-display { grid-area: ticket-display; background-color:lightblue; border-left: 1px solid gray;}
 .footer { grid-area: footer; background-color:lightblue; border-top: 1px solid gray;}
 
 .btn-link, .btn-link:hover, .btn-link:focus { text-decoration: none; color: black; }
 
+.drinks-cat-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-areas: "category category" "food-1 food-2" "food-3 food-4" "food-5 food-6"
+}
+
+.drinks-cat-grid div {
+    background: white;
+}

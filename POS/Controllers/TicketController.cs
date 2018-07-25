@@ -20,7 +20,7 @@ namespace POS.Controllers
         {
             OrderInfo newOrder = new OrderInfo();
 
-            return View(newOrder);
+            return PartialView(newOrder);
         }
 
         [HttpPost("/tickets")]
