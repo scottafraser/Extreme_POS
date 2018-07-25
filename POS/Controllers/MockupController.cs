@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using POS.Models;
+using POS.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,10 +12,14 @@ namespace POS.Controllers
 {
     public class MockupController : Controller
     {
-        [HttpGet("/")]
-        public IActionResult Index()
+        [HttpGet("/home")]
+        public IActionResult Index(int id)
         {
-            return View();
+            Models.User existingUser = Models.User.Find(id);
+            OrderInfo newOrder = new OrderInfo();
+            newOrder.FoundUser = existingUser;
+
+            return View(newOrder);
         }
 
 

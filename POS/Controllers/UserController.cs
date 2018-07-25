@@ -14,19 +14,17 @@ namespace POS.Controllers
             return View();
         }
 
-        [HttpGet("/users")]
-        public ActionResult ViewAll()
+        [HttpGet("/")]
+        public ActionResult Index()
         {
             return View(Models.User.GetAll());
         }
 
-        [HttpPost("/users")]
-        public ActionResult ViewAllPost(string name, bool admin)
+        [HttpPost("/users/{id}")]
+        public ActionResult ViewAllPost(int id)
         {
-            Models.User newUser = new Models.User(name, admin);
-            newUser.Save();
 
-            return RedirectToAction("ViewAll");
+            return RedirectToAction("Index", "Mockup", new { id = id });
         }
 
         [HttpGet("/user/{id}/update")]

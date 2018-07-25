@@ -41,7 +41,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (food_id) VALUES (@FoodId) WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tickets SET food_id = @FoodId WHERE id = @searchId;";
 
             MySqlParameter food_id = new MySqlParameter();
             food_id.ParameterName = "@FoodId";
@@ -66,7 +66,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (drink_id) VALUES (@DrinkId) WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tickets SET drink_id = @DrinkId WHERE id = @searchId;";
 
             MySqlParameter drink_id = new MySqlParameter();
             drink_id.ParameterName = "@DrinkId";
@@ -91,7 +91,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (user_id) VALUES (@UserId) WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tickets SET user_id = @UserId WHERE id = @searchId;";
 
             MySqlParameter user_id = new MySqlParameter();
             user_id.ParameterName = "@UserId";
@@ -116,7 +116,7 @@ namespace POS.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tickets (table_id) VALUES (@TableId) WHERE id = @searchId;";
+            cmd.CommandText = @"UPDATE tickets SET table_id = @TableId WHERE id = @searchId;";;
 
             MySqlParameter table_id = new MySqlParameter();
             table_id.ParameterName = "@TableId";

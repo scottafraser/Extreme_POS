@@ -25,7 +25,7 @@ namespace POS.Controllers
             return PartialView(newOrder);
         }
 
-        [HttpPost("/tickets{table_id}/new")]
+        [HttpGet("/tickets/{table_id}/{user_id}/new")]
         public ActionResult CreateTicket(int table_id, int user_id)
         {
             Ticket newTicket = new Ticket(Ticket.GenerateTicketNumber());
@@ -33,7 +33,7 @@ namespace POS.Controllers
             newTicket.AddUser(Models.User.Find(user_id));
             newTicket.AddTable(Table.Find(table_id));                    
 
-            return RedirectToAction("Index", newTicket);
+            return RedirectToAction("Home");
         }
 
         [HttpGet("/ticket/{id}/update")]

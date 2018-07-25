@@ -32,7 +32,8 @@
                 <div class="ui-nav">
                     <div class="permissions">
                         <div>
-                            <button id="server" type="button" class="btn btn-link btn-sm">Server</button>  
+                            <button id="server" type="button" class="btn btn-link btn-sm">@Model.FoundUser.Name</button> 
+                        
                         </div>
                         <div>
                             <button id="admin" type="button" class="btn btn-link btn-sm">Admin</button>
@@ -61,7 +62,7 @@
                             <div class="table-grid">
                                 <div class="seat seat-1"><span class="label">Seat 1</span></div>
                                 <div class="seat seat-2"><span class="label">Seat 2</span></div>
-                                <div class="wide-table"><span class="label">Table 1</span></div>
+                                <div class="wide-table"><a href="/tickets/1/@Model.FoundUser.Id/new">Table 1</a></div>
                                 <div class="seat seat-3"><span class="label">Seat 3</span></div>
                                 <div class="seat seat-4"><span class="label">Seat 4</span></div>
                             </div>
@@ -178,6 +179,7 @@
             <!-- Ticket --> 
             <div class="ticket-display grid-piece">
                 <div class="ticket-grid">
+                    
                     <div class="ticket-number"><span class="label">Ticket #</span></div>
                     <div class="mar food-orders d-flex justify-content-between">
                         <div>Food</div>

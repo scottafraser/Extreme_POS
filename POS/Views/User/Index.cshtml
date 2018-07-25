@@ -1,0 +1,10 @@
+﻿
+<ul>
+    
+@foreach (var server in Model)
+
+{
+  <li class="food-item"><form action="/users/@server.Id" method="POST"><button type="submit" class="btn btn-info">@server.Name</button></form></li>
+}
+
+</ul>
