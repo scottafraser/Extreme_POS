@@ -107,12 +107,23 @@ body {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-gap: 10px;
     padding: 10px;
-    grid-template-areas: "category category" "food-1 food-2" "food-3 food-4" "food-5 food-6"
-}
+    grid-template-areas: "beverages ." "beers wines";
+}   .beverages{grid-area:beverages;} .beers{grid-area:beers;} .wines{grid-area:wines;}
+    .drinks-drinks-grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+        padding: 10px;
+        grid-template-areas: "drink-type drink-type" "drink-1 drink-2" "drink-3 drink-4" "drink-5 drink-6";
+    }   .drink-type{grid-area:drink-type;} .drink-1{grid-area:drink-1;} .drink-2{grid-area:drink-2;}
+        .drink-3{grid-area:drink-3;} .drink-4{grid-area:drink-4;} .drink-5{grid-area:drink-5;} .drink-6{grid-area: drink-6;}
 
-.drinks-cat-grid div {
+.drinks-cat-grid div div {
     background: white;
+    outline: 1px solid gray;
 }
