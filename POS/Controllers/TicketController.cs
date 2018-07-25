@@ -16,20 +16,24 @@ namespace POS.Controllers
         }
 
         [HttpGet("/tickets")]
-        public ActionResult Index()
+        public ActionResult Index(int tableNum)
         {
             OrderInfo newOrder = new OrderInfo();
+            //Ticket thisTicket = new Ticket();
+            //List<Food> allFood = allFood.
 
             return View(newOrder);
         }
 
-        [HttpPost("/tickets")]
-        public ActionResult ViewAllPost(int ticketNumber)
+        [HttpPost("/tickets{table_id}/new")]
+        public ActionResult CreateTicket(int table_id, int user_id)
         {
-            Ticket newTicket = new Ticket(ticketNumber);
+            Ticket newTicket = new Ticket(Ticket.GenerateTicketNumber());
             newTicket.Save();
+            newTicket.AddUser(Models.User.Find(user_id));
+            newTicket.AddTable(Table.Find(table_id));                    
 
-            return RedirectToAction("ViewAll", newTicket);
+            return RedirectToAction("Index", newTicket);
         }
 
         [HttpGet("/ticket/{id}/update")]
