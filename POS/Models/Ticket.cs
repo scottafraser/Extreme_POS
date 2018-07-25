@@ -201,6 +201,14 @@ namespace POS.Models
             }
         }
 
+        public static int GenerateTicketNumber() 
+        {
+            Random randomNum = new Random();
+            int ticketNumber = randomNum.Next(200, 999);
+
+            return ticketNumber;
+        }
+
         public void Edit(int newTicket, int newFoodId, int newDrinkId, int newUserId, int newTableId)
         {
             MySqlConnection conn = DB.Connection();
@@ -268,6 +276,64 @@ namespace POS.Models
             MySqlParameter thisId = new MySqlParameter();
             thisId.ParameterName = "@thisId";
             thisId.Value = id;
+            cmd.Parameters.Add(thisId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int ticketId = 0;
+            int ticketNum = 0;
+            int foodId = 0;
+            int drinkId = 0;
+            int userId = 0;
+            int tableId = 0;
+
+            Food newFood = null;
+            Drink newDrink = null;
+            User newUser = null;
+            Table newTable = null;
+
+
+            while (rdr.Read())
+            {
+                ticketId = rdr.GetInt32(0);
+                ticketNum = rdr.GetInt32(1);
+                foodId = rdr.GetInt32(2);
+                drinkId = rdr.GetInt32(3);
+                userId = rdr.GetInt32(4);
+                tableId = rdr.GetInt32(5);
+
+                newFood = Food.Find(foodId);
+                newDrink = Drink.Find(drinkId);
+                newUser = User.Find(userId);
+                newTable = Table.Find(tableId);
+            }
+
+            Ticket foundTicket = new Ticket(ticketNum);
+            foundTicket.Food_Id = newFood;
+            foundTicket.Drink_Id = newDrink;
+            foundTicket.User_Id = newUser;
+            foundTicket.Table_Id = newTable;
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return foundTicket;
+        }
+
+        public static Ticket FindTicketNumber(int ticketnumber)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM tickets WHERE ticket_number = @thisId;";
+
+            MySqlParameter thisId = new MySqlParameter();
+            thisId.ParameterName = "@thisId";
+            thisId.Value = ticketnumber;
             cmd.Parameters.Add(thisId);
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;

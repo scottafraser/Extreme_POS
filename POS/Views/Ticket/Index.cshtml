@@ -1,5 +1,56 @@
-@foreach (var ticket in Model.AllTickets)
-{
-    <h5 class="card-title"><strong>Server: </strong>@ticket.User_Id.Name</h5>
-    <h5 class="card-title"><strong>Table Number: </strong>@ticket.Table_Id.Number</h5>
-}
+
+
+<div style="width:100px;">
+    @foreach (var ticket in Model.AllTickets)
+    {
+     <h5 class="card-title"><strong>Server</strong>@ticket.User_Id.Name</h5>
+    
+   
+    <h5 class="card-title"><strong>Table Number</strong>@ticket.Table_Id.Number</h5>
+    <hr>
+    <!-- repeat this table for every seat -->
+    <div class="card" style="width: 25rem;">
+        <div class="card-header">
+            Seat #
+        </div>
+        <ul class="list-group list-group-flush">
+            <!-- display every ordered item on ticket -->
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <a href="#"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        $15
+                    </div>
+                </div>
+                <!-- optional modifier row.  repeat as needed -->
+                <div class="row">
+                    <div class="col-sm-1">
+                        -
+                    </div>
+                    <div class="col-sm-7">
+                        <a href="#"><small>modifier</small></a>
+                    </div>
+                    <div class="col-sm-4">
+                        $2
+                    </div>
+                </div>
+            </li>
+
+            <li class="list-group-item"><a href="#">Pending Menu Order Item #2</a></li>
+            <li class="list-group-item"><a href="#">Pending Menu Order Item #3</a></li>
+            <li class="list-group-item"><a href="#">Pending Menu Order Item #4</a></li>
+        </ul>
+    </div>
+    <!-- end repeat for every seat -->
+    <div class="">
+        <hr>
+    </div>
+    <div class="">
+        <a href="#" class="btn btn-primary">Order</a> <a href="#" class="btn btn-primary">Cancel</a> <a href="#" class="btn btn-primary">Another Option</a>
+    </div>
+
+    }
+    </div>
+
