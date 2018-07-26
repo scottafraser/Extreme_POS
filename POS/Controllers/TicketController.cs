@@ -31,7 +31,7 @@ namespace POS.Controllers
             Ticket newTicket = new Ticket(Ticket.GenerateTicketNumber());
             newTicket.Save();
             newTicket.AddUser(Models.User.Find(user_id));
-            newTicket.AddTable(Table.Find(table_id));
+            newTicket.AddTable(table_id);
 
             return RedirectToAction("Index", "Mockup", new { id = user_id });
         }

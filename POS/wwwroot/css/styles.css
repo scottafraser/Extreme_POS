@@ -154,3 +154,12 @@ table * {
     text-align:center;
     padding: 10px;
 }
+
+.hidden {
+    display: none;
+}
+
+div a {
+    text-decoration: none;
+    color: black;
+}

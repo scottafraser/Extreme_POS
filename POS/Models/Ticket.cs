@@ -13,7 +13,7 @@ namespace POS.Models
         public Food Food_Id { get; set; }
         public Drink Drink_Id { get; set; }
         public User User_Id { get; set; }
-        public Table Table_Id { get; set; }
+        public int Table_Id { get; set; }
         public int Id { get; set; }
 
         public Ticket(int ticketNumber, int id = 0)
@@ -114,7 +114,7 @@ namespace POS.Models
             }
         }
 
-        public void AddTable(Table newTable)
+        public void AddTable(int id)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -123,7 +123,7 @@ namespace POS.Models
 
             MySqlParameter table_id = new MySqlParameter();
             table_id.ParameterName = "@TableId";
-            table_id.Value = newTable.Id;
+            table_id.Value = id;
             cmd.Parameters.Add(table_id);
 
             MySqlParameter searchId = new MySqlParameter();
@@ -137,6 +137,8 @@ namespace POS.Models
             {
                 conn.Dispose();
             }
+
+            Table_Id = id;
         }
 
         /*
@@ -259,7 +261,7 @@ namespace POS.Models
             this.Food_Id = Food.Find(newFoodId);
             this.Drink_Id = Drink.Find(newDrinkId);
             this.User_Id = User.Find(newUserId);
-            this.Table_Id = Table.Find(newTableId);
+            this.Table_Id = newTableId;
 
             conn.Close();
             if (conn != null)

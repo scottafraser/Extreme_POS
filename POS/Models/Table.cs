@@ -217,7 +217,7 @@ namespace POS.Models
                 Food newFood = Food.Find(foodId);
                 Drink newDrink = Drink.Find(drinkId);
                 User newUser = User.Find(userId);
-                Table newTable = Table.Find(tableId);
+                int newTable = tableId;
 
                 Ticket newTicket = new Ticket(ticketNum);
                 newTicket.Food_Id = newFood;
