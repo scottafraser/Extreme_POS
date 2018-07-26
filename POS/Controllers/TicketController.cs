@@ -36,7 +36,7 @@ namespace POS.Controllers
             return RedirectToAction("Index", "Mockup", new { id = user_id });
         }
 
-        [HttpPost("/foods/{food_id}/{user_id}/order")]
+        [HttpPost("/ticket/create")]
         public ActionResult Order(int food_id, int user_id)
         {
             Food foodOrder = Food.Find(food_id);
@@ -44,7 +44,7 @@ namespace POS.Controllers
             OrderInfo newOrder = new OrderInfo();
 
 
-            return RedirectToAction("Index", "Mockup", new { id = user_id });
+            return RedirectToAction("Index", "Mockup");
         }
 
    

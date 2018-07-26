@@ -154,3 +154,8 @@ table * {
     text-align:center;
     padding: 10px;
 }
+
+#print {
+    align-content: center;
+   
+}

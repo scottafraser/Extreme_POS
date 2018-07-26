@@ -81,7 +81,7 @@ $(function() {
         var total = 0;
  
         $('.price').each(function(i, obj) {
-            items.push()
+            items.push(obj.value)
             for (var i = 0; i < items.length; i++) {
                 total += items[i] << 0;
             }
