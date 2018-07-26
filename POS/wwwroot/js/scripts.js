@@ -98,7 +98,9 @@ $(function() {
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
         var foodId = $(this).children().first().siblings().html();
+
         var ticketId = $("#ticket-id").text();  
+
         foodAdd(foodName, foodId, ticketId);
     });
 
@@ -109,11 +111,13 @@ $(function() {
     });
 
 
+
     $(document).on("click", ".drinks-item, .food-item", function () {
         
     });
 
 
+  
 
 
 
