@@ -49,10 +49,12 @@ namespace POS.Controllers
         }
 
         [HttpPost("/drinks-add")]
-        public IActionResult DrinkAdd(int id)
+        public IActionResult DrinkAdd(int id, int ticket)
         {
             OrderInfo newOrder = new OrderInfo();
             newOrder.FindDrink(id);
+            Orders order = new Orders(ticket, 0, id);
+            order.Create();
 
             return PartialView("DrinksAdd", newOrder.FoundDrink);
         }
