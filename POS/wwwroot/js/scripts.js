@@ -83,8 +83,6 @@ $(function() {
 
         $('.price').each(function(i, obj) {
 
-        foodAdd(foodName, foodId);
-    });
                 total++;
         });     
 
