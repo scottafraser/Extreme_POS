@@ -82,8 +82,12 @@ $(function() {
         var items = [];
 
         $('.price').each(function(i, obj) {
+
+        foodAdd(foodName, foodId);
+    });
                 total++;
         });     
+
 
         console.log(total);
 
@@ -94,11 +98,6 @@ $(function() {
         var drinkId = $(this).children().first().siblings().html();
         var ticketId = $("#ticket-id").text();
         drinkAdd(drinkId, ticketId);
-    });
-
-
-    $(document).on("click", ".drinks-item, .food-item", function () {
-        console.log(x);
     });
 
 
