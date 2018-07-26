@@ -137,7 +137,8 @@ body {
     grid-template-rows: .25fr 1fr 1fr .25fr;
     grid-gap: 10px;
     padding: 10px;
-    grid-template-areas: "ticket-number ticket-number" "food-orders food-orders" "drink-orders drink-orders" "total total"
+    grid-template-areas: "ticket-number ticket-number" "food-orders food-orders" "drink-orders drink-orders" "total total"
+
 }   .ticket-number{grid-area:ticket-number;} .food-orders{grid-area:food-orders;} .drink-orders{grid-area:drink-orders;}
     .total{grid-area:total;}
 
@@ -155,7 +156,17 @@ table * {
     padding: 10px;
 }
 
+
 #print {
     align-content: center;
    
+
+.hidden {
+    display: none;
+}
+
+div a {
+    text-decoration: none;
+    color: black;
+
 }
