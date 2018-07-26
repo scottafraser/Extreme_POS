@@ -133,15 +133,6 @@ namespace POS.ViewModels
             FoundTable = Table.Find(id);
         }
 
-        //SELECT food.* FROM tickets
-        //        JOIN orders ON(tickets.id = orders.ticket_id)
-        //        JOIN food ON(orders.food_id = food.id)
-        //        WHERE tickets.id = 2
-
-        //SELECT drinks.* FROM tickets
-            //JOIN orders ON(tickets.id = orders.ticket_id)
-            //JOIN drinks ON(orders.drink_id = drinks.id)
-            //WHERE tickets.id = 2
 
     }
 }

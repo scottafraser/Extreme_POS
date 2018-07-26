@@ -89,11 +89,7 @@ $(function() {
 
     var total = 1;
 
-    $(document).click(function() {
-        $('.price').each(function(i, obj) {
-                console.log($(this).html());
-        });   
-    });
+
 
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
