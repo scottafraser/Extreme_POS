@@ -35,11 +35,10 @@ var foodFlood = function() { // populates the food tab buttons
 }
 
 
-
-var foodAdd = function(name, id) { // hopefully tosses said buttons into ticket
+var foodAdd = function(name, id, ticket) { // hopefully tosses said buttons into ticket
     $.ajax({
         type: 'post',
-        data: { name: name, id: id },
+        data: { name: name, id: id, ticket: ticket},
         url: '/food-add',
         success: function (result) {
           $('.food-orders tbody').append(result);
@@ -77,6 +76,7 @@ $(function() {
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
         var foodId = $(this).children().first().siblings().html();
+        var ticketId = $("#ticket-id").text();
         var items = [];
         var total = 0;
  
@@ -88,7 +88,7 @@ $(function() {
             console.log(items)
         });
 
-        foodAdd(foodName, foodId);
+        foodAdd(foodName, foodId, ticketId);
     });
 
     $(document).on("click", ".drinks-item", function () {
@@ -96,10 +96,6 @@ $(function() {
         drinkAdd(drinkId);
     });
 
-      $(document).on("click", ".drinks-item", function () {
-        var drinkId = $(this).children().first().siblings().html();
-        drinkAdd(drinkId);
-    });
 
 
 
@@ -107,11 +103,13 @@ $(function() {
 
 
 
-    $(".wide-table").click(function() {
-        var tableId = $(this).children().children().text();
+    $(".wide-table, .bar .seat").click(function() {
+        var tableId = $(this).children().children().children().text();
+        console.log(tableId);
         var url = $(this).children().first().attr('href');
         $.ajax({
         type: 'post',
+        data: {table_id: tableId},
         url: url,
         success: function (result) {
           $('.ticket-number').html(result);
