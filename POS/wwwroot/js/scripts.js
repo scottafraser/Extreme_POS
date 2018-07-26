@@ -79,9 +79,9 @@ $(function() {
         var foodId = $(this).children().first().siblings().html();
         var items = [];
         var total = 0;
-    
+ 
         $('.price').each(function(i, obj) {
-            items.push(this)
+            items.push()
             for (var i = 0; i < items.length; i++) {
                 total += items[i] << 0;
             }

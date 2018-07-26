@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 24, 2018 at 11:08 PM
+-- Generation Time: Jul 26, 2018 at 03:25 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -127,6 +127,26 @@ INSERT INTO `mods` (`id`, `name`, `price`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  `drink_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `ticket_id`, `food_id`, `drink_id`) VALUES
+(1, 2, 2, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tables`
 --
 
@@ -140,7 +160,15 @@ CREATE TABLE `tables` (
 --
 
 INSERT INTO `tables` (`id`, `number`) VALUES
-(1, 1);
+(1, 1),
+(3, 2),
+(4, 3),
+(5, 10),
+(6, 11),
+(7, 12),
+(8, 13),
+(9, 14),
+(10, 15);
 
 -- --------------------------------------------------------
 
@@ -151,18 +179,107 @@ INSERT INTO `tables` (`id`, `number`) VALUES
 CREATE TABLE `tickets` (
   `id` int(11) NOT NULL,
   `ticket_number` int(11) NOT NULL,
-  `food_id` int(11) NOT NULL,
-  `drink_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `table_id` int(11) NOT NULL
+  `table_id` int(11) NOT NULL,
+  `active` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `ticket_number`, `food_id`, `drink_id`, `user_id`, `table_id`) VALUES
-(1, 1, 1, 1, 1, 1);
+INSERT INTO `tickets` (`id`, `ticket_number`, `user_id`, `table_id`, `active`) VALUES
+(1, 1, 1, 1, ''),
+(2, 23, 1, 4, ''),
+(3, 631, 3, 0, ''),
+(4, 303, 0, 0, ''),
+(5, 590, 3, 1, ''),
+(6, 729, 3, 1, ''),
+(7, 577, 2, 1, ''),
+(8, 360, 2, 1, ''),
+(9, 0, 1, 0, ''),
+(10, 234, 1, 0, ''),
+(11, 897, 3, 1, ''),
+(12, 422, 3, 1, ''),
+(13, 815, 3, 1, ''),
+(14, 610, 3, 1, ''),
+(15, 736, 3, 1, ''),
+(16, 393, 3, 1, ''),
+(17, 494, 3, 1, ''),
+(18, 672, 1, 1, ''),
+(19, 800, 1, 1, ''),
+(20, 284, 1, 1, ''),
+(21, 650, 1, 1, ''),
+(22, 974, 1, 1, ''),
+(23, 276, 1, 1, ''),
+(24, 889, 1, 1, ''),
+(25, 990, 1, 1, ''),
+(26, 517, 1, 1, ''),
+(27, 807, 1, 1, ''),
+(28, 311, 1, 1, ''),
+(29, 491, 1, 1, ''),
+(30, 815, 1, 1, ''),
+(31, 239, 1, 1, ''),
+(32, 688, 1, 1, ''),
+(33, 346, 1, 1, ''),
+(34, 899, 1, 1, ''),
+(35, 323, 1, 1, ''),
+(36, 597, 0, 0, ''),
+(37, 723, 1, 1, ''),
+(38, 233, 0, 0, ''),
+(39, 449, 1, 1, ''),
+(40, 652, 0, 0, ''),
+(41, 993, 1, 1, ''),
+(42, 504, 0, 0, ''),
+(43, 579, 0, 0, ''),
+(44, 941, 0, 0, ''),
+(45, 343, 0, 0, ''),
+(46, 606, 0, 0, ''),
+(47, 329, 0, 0, ''),
+(48, 589, 0, 0, ''),
+(49, 335, 0, 0, ''),
+(50, 989, 0, 0, ''),
+(51, 453, 0, 0, ''),
+(52, 864, 0, 0, ''),
+(53, 317, 0, 0, ''),
+(54, 830, 0, 0, ''),
+(55, 590, 0, 0, ''),
+(56, 606, 0, 0, ''),
+(57, 458, 2, 1, ''),
+(58, 438, 2, 1, ''),
+(59, 657, 0, 0, ''),
+(60, 435, 0, 0, ''),
+(61, 319, 1, 1, ''),
+(62, 819, 1, 1, ''),
+(63, 281, 1, 1, ''),
+(64, 698, 1, 1, ''),
+(65, 331, 1, 1, ''),
+(66, 575, 1, 1, ''),
+(67, 784, 1, 1, ''),
+(68, 347, 1, 1, ''),
+(69, 818, 1, 1, ''),
+(70, 693, 1, 1, ''),
+(71, 768, 1, 1, ''),
+(72, 686, 1, 1, ''),
+(73, 942, 1, 1, ''),
+(74, 576, 1, 1, ''),
+(75, 897, 1, 1, ''),
+(76, 887, 1, 1, ''),
+(77, 607, 1, 1, ''),
+(78, 504, 1, 1, ''),
+(79, 560, 1, 1, ''),
+(80, 372, 1, 1, ''),
+(81, 425, 1, 1, ''),
+(82, 824, 1, 1, ''),
+(83, 308, 1, 1, ''),
+(84, 582, 1, 1, ''),
+(85, 211, 1, 1, ''),
+(86, 619, 1, 1, ''),
+(87, 964, 1, 1, ''),
+(88, 690, 1, 1, ''),
+(89, 225, 1, 1, ''),
+(90, 822, 1, 1, ''),
+(91, 525, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -181,7 +298,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `admin`) VALUES
-(1, 'Jessica', 0);
+(1, 'Jessica', 0),
+(2, 'Tim', 1),
+(3, 'Franz', 0);
 
 --
 -- Indexes for dumped tables
@@ -209,6 +328,12 @@ ALTER TABLE `history`
 -- Indexes for table `mods`
 --
 ALTER TABLE `mods`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -258,22 +383,28 @@ ALTER TABLE `mods`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
