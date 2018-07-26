@@ -72,7 +72,7 @@ var grabTicket = function() {
     $.ajax({
         type: 'get',
         data: {ticket: ticket},
-        url: '/ticket-display',
+        url: '/ticket-update',
         success: function (result) {
           $('.ticket-display').html(result);
         }
