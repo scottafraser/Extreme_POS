@@ -67,6 +67,20 @@ var drinkAdd = function(id, ticket) {
       });
 }
 
+var grabTicket = function() {
+    var ticket = $("#ticket-id").text();
+    $.ajax({
+        type: 'get',
+        data: {ticket: ticket},
+        url: '/ticket-update',
+        success: function (result) {
+          $('.ticket-display').html(result);
+        }
+
+      
+    });
+}
+
 $(function() {
     menuNav();
     menuDisplay();
@@ -75,19 +89,13 @@ $(function() {
 
     var total = 1;
 
+
+
     $(document).on("click", ".food-item", function () {
         var foodName = $(this).children().first().html();
         var foodId = $(this).children().first().siblings().html();
-        var ticketId = $("#ticket-id").text();
-        var items = [];
 
-        $('.price').each(function(i, obj) {
-
-                total++;
-        });     
-
-
-        console.log(total);
+        var ticketId = $("#ticket-id").text();  
 
         foodAdd(foodName, foodId, ticketId);
     });
@@ -99,6 +107,13 @@ $(function() {
     });
 
 
+
+    $(document).on("click", ".drinks-item, .food-item", function () {
+        
+    });
+
+
+  
 
 
 
@@ -113,7 +128,13 @@ $(function() {
         success: function (result) {
           $('.ticket-number').html(result);
         }
+
+      
       });
+
+      setTimeout(function(){ grabTicket() }, 500); // not proud of this
+
+
     });
 
 });
