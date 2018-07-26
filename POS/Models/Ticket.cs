@@ -527,7 +527,7 @@ namespace POS.Models
                 JOIN food ON(orders.food_id = food.id)
                 WHERE tickets.id = @ticketId";
 
-            cmd.Parameters.AddWithValue("@ticketsId", Id);
+            cmd.Parameters.AddWithValue("@ticketId", this.Id);
 
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             List<Food> orderedFood = new List<Food> { };
@@ -562,7 +562,7 @@ namespace POS.Models
             JOIN drinks ON(orders.drink_id = drinks.id)
             WHERE tickets.id = 2 = @ticketId";
 
-            cmd.Parameters.AddWithValue("@ticketsId", Id);
+            cmd.Parameters.AddWithValue("@ticketId", this.Id);
 
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             List<Drink> orderedDrink = new List<Drink> { };
